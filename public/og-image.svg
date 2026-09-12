@@ -1,0 +1,21 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Roboto, sans-serif">
+  <rect width="1200" height="630" fill="#FEFEFE"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#0E93D3"/>
+  <g transform="translate(86 132) scale(0.52)">
+    <path d="M146 305 A152 152 0 1 1 366 305" stroke="#0E93D3" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <path d="M236 136 C200 210 150 285 92 320" stroke="#5A6B78" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M276 136 C312 210 362 285 420 320" stroke="#5A6B78" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M92 320 C170 292 342 292 420 320" stroke="#5A6B78" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <g fill="#5A6B78">
+      <rect x="231" y="128" width="12" height="175" rx="2"/>
+      <rect x="269" y="128" width="12" height="175" rx="2"/>
+      <rect x="231" y="128" width="50" height="11" rx="3"/>
+      <rect x="231" y="182" width="50" height="10" rx="3"/>
+      <rect x="231" y="236" width="50" height="10" rx="3"/>
+    </g>
+    <path d="M88 352 C150 288 362 288 424 352 C362 330 150 330 88 352 Z" fill="#0E93D3"/>
+  </g>
+  <text x="86" y="392" font-size="76" font-weight="800" fill="#2C3A44" letter-spacing="-2">Jembatan Selaras Digital</text>
+  <text x="86" y="456" font-size="30" font-weight="500" fill="#6A7A87">Fast, mobile-first websites and digital products.</text>
+  <text x="86" y="546" font-size="20" font-weight="700" fill="#0E93D3" letter-spacing="4">DIGITAL PRODUCT STUDIO — JAKARTA, ID</text>
+</svg>
