@@ -11,7 +11,7 @@ export const company = {
   phone: '+62 21 5000 1234',
   whatsapp: '+62 812 3456 7890',
   address: 'Jl. Jenderal Sudirman Kav. 52, Jakarta Selatan 12190, Indonesia',
-  founded: 2019,
+  founded: 2026,
   social: [
     { label: 'LinkedIn', href: 'https://linkedin.com/company/' },
     { label: 'Instagram', href: 'https://instagram.com/' },
@@ -25,6 +25,7 @@ export const nav = [
   { label: 'About', href: '#about' },
   { label: 'Work', href: '#work' },
   { label: 'Clients', href: '#clients' },
+  { label: 'Pricing', href: '#pricing' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -138,7 +139,7 @@ export const about = {
   eyebrow: 'About us',
   title: 'A studio named after what we actually do — build bridges.',
   body: [
-    'Jembatan Selaras Digital started in 2019 with a simple observation: most companies do not have a technology problem, they have a translation problem. Business teams know what they need. Engineering teams know what is possible. Very little gets across the gap.',
+    'Jembatan Selaras Digital started in 2026 with a simple observation: most companies do not have a technology problem, they have a translation problem. Business teams know what they need. Engineering teams know what is possible. Very little gets across the gap.',
     'We sit in the middle. We work in small senior teams, we write the plan in language your stakeholders can approve, and we ship in short cycles so you see real screens instead of status reports.',
   ],
   principles: [
@@ -200,4 +201,81 @@ export const contact = {
   title: 'Tell us what you are trying to build.',
   body: 'Send a short brief and we will reply within one business day with an honest read on scope and timeline — before any proposal.',
   interests: ['Company Profile', 'Web Application', 'UI/UX Design', 'Performance Audit'],
+};
+
+/**
+ * Engagement pricing. Figures are starting points in IDR, not fixed quotes —
+ * every number is paired with the scope and timeline it assumes, so a bigger
+ * brief moves the price without contradicting the page.
+ */
+export const pricing = {
+  eyebrow: 'Pricing',
+  title: 'What an engagement costs, before you ask.',
+  body: 'Three ways teams usually start with us. Each figure is a starting point for the scope described — we confirm the real number after the brief, and we would rather tell you early if the budget and the ambition do not meet.',
+  plans: [
+    {
+      name: 'Company Profile',
+      price: 'From Rp 15 jt',
+      timeline: '3–4 weeks',
+      summary: 'A corporate site your marketing team can keep updating on its own.',
+      includes: [
+        '5–8 pages, written and structured with you',
+        'CMS so copy and images stay editable',
+        'SEO foundations & analytics',
+        'Performance budget: under 2s on 4G',
+        'Repository, accounts, and documentation handed over',
+      ],
+      cta: 'Start a profile site',
+    },
+    {
+      name: 'Web Application',
+      price: 'From Rp 60 jt',
+      timeline: '8–12 weeks',
+      summary: 'Dashboards, internal tools, and customer portals built around a real workflow.',
+      includes: [
+        'Discovery and workflow mapping',
+        'UI/UX design and a component system',
+        'React frontend with API & backend integration',
+        'Role-based access and reporting',
+        'Deployment, monitoring, and 30 days of post-launch support',
+      ],
+      cta: 'Scope an application',
+      featured: true,
+    },
+    {
+      name: 'Custom & Enterprise',
+      price: "Let's talk",
+      timeline: 'Scoped per phase',
+      summary: 'Multi-system integrations, mobile plus web, or a dedicated team for a quarter.',
+      includes: [
+        'System integration and data migration',
+        'Mobile and web delivered together',
+        'A dedicated senior team, booked by the quarter',
+        'Security and compliance review',
+        'Training and staged handover to your own team',
+      ],
+      cta: 'Book a scoping call',
+    },
+  ],
+  // Recurring and one-off work that sits outside a build.
+  addons: [
+    {
+      name: 'Care Plan',
+      price: 'Rp 2–5 jt',
+      unit: '/month',
+      text: 'Monitoring, security patching, backups, and a named person to email when something breaks.',
+    },
+    {
+      name: 'Performance Audit',
+      price: 'Rp 7,5 jt',
+      unit: 'one-off',
+      text: 'Core Web Vitals, mobile layout, and accessibility reviewed on an existing site, with a prioritised fix list.',
+    },
+  ],
+  terms: [
+    'Payment in three parts — 50% to start, 30% at design sign-off, 20% on handover.',
+    'Two rounds of revision included at each stage; further rounds are quoted before we begin them.',
+    'Hosting, domains, third-party licences, photography, and copywriting are not included unless quoted.',
+    'Prices exclude VAT (PPN) and are valid for 30 days from the proposal date.',
+  ],
 };

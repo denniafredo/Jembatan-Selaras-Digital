@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Reveal, Marquee, ArrowIcon } from './ui'
+import { Reveal, Marquee, ArrowIcon, MailIcon, PhoneIcon, WhatsAppIcon, PinIcon } from './ui'
 import { contact, company } from '../data/site'
 
 /**
@@ -54,15 +54,23 @@ export default function Contact() {
     }
   }
 
+  // The label is no longer printed — it stays for the key and for screen readers,
+  // which would otherwise hear a decorative icon and nothing else.
   const details = [
-    { label: 'Email', value: company.email, href: `mailto:${company.email}` },
-    { label: 'Phone', value: company.phone, href: `tel:${company.phone.replace(/\s/g, '')}` },
+    { label: 'Email', icon: MailIcon, value: company.email, href: `mailto:${company.email}` },
+    {
+      label: 'Phone',
+      icon: PhoneIcon,
+      value: company.phone,
+      href: `tel:${company.phone.replace(/\s/g, '')}`,
+    },
     {
       label: 'WhatsApp',
+      icon: WhatsAppIcon,
       value: company.whatsapp,
       href: `https://wa.me/${company.whatsapp.replace(/[^0-9]/g, '')}`,
     },
-    { label: 'Studio', value: company.address },
+    { label: 'Studio', icon: PinIcon, value: company.address },
   ]
 
   return (
@@ -98,28 +106,34 @@ export default function Contact() {
             </Reveal>
 
             <dl className="mt-12 space-y-px overflow-hidden rounded-2xl border border-line bg-line">
-              {details.map((detail, i) => (
-                <Reveal key={detail.label} delay={i * 70}>
-                  <div className="bg-white px-6 py-5">
-                    <dt className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-muted">
-                      {detail.label}
-                    </dt>
-                    <dd className="mt-1.5 text-[0.95rem] font-semibold text-ink-900">
-                      {detail.href ? (
-                        <a
-                          href={detail.href}
-                          className="inline-flex items-center gap-1.5 hover:text-brand"
-                        >
-                          {detail.value}
-                          <ArrowIcon className="h-3.5 w-3.5" />
-                        </a>
-                      ) : (
-                        detail.value
-                      )}
-                    </dd>
-                  </div>
-                </Reveal>
-              ))}
+              {details.map((detail, i) => {
+                const Icon = detail.icon
+                return (
+                  <Reveal key={detail.label} delay={i * 70}>
+                    <div className="group flex items-center gap-4 bg-white px-6 py-5">
+                      <dt className="shrink-0">
+                        <span className="sr-only">{detail.label}</span>
+                        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-brand group-hover:bg-brand group-hover:text-white">
+                          <Icon className="h-[18px] w-[18px]" />
+                        </span>
+                      </dt>
+                      <dd className="min-w-0 text-[0.95rem] font-semibold text-ink-900">
+                        {detail.href ? (
+                          <a
+                            href={detail.href}
+                            className="inline-flex items-center gap-1.5 hover:text-brand"
+                          >
+                            {detail.value}
+                            <ArrowIcon className="h-3.5 w-3.5 shrink-0" />
+                          </a>
+                        ) : (
+                          detail.value
+                        )}
+                      </dd>
+                    </div>
+                  </Reveal>
+                )
+              })}
             </dl>
           </div>
 

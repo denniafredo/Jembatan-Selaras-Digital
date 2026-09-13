@@ -140,7 +140,7 @@ export default function Hero() {
               ))}
             </div>
             <p className="mt-5 text-sm text-muted md:text-right">
-              Building digital products since {company.founded}
+              Founded in Jakarta, {company.founded}
             </p>
           </Reveal>
         </div>
