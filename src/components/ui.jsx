@@ -43,15 +43,61 @@ export function Reveal({ children, delay = 0, as: Tag = 'div', className = '' })
 }
 
 /** Infinite horizontal ticker. Children are duplicated once for a seamless loop. */
+/**
+ * Seamless horizontal ticker. The track holds two identical halves and slides by
+ * -50%, so a half must be at least as wide as the screen or the loop runs dry and
+ * leaves a gap. A short list (two client names on a wide monitor) does exactly that,
+ * so each half repeats its children until it covers the container. The duration
+ * scales with the repeat count to keep the scrolling speed constant.
+ */
 export function Marquee({ children, duration = 32, pauseOnHover = true, className = '' }) {
+  const containerRef = useRef(null)
+  const copyRef = useRef(null)
+  const [repeats, setRepeats] = useState(1)
+
+  useEffect(() => {
+    const container = containerRef.current
+    const copy = copyRef.current
+    if (!container || !copy) return
+
+    const measure = () => {
+      const copyWidth = copy.scrollWidth
+      const containerWidth = container.clientWidth
+      if (!copyWidth || !containerWidth) return
+      setRepeats(Math.max(1, Math.ceil(containerWidth / copyWidth)))
+    }
+
+    measure()
+    if (!('ResizeObserver' in window)) return
+    const observer = new ResizeObserver(measure)
+    observer.observe(container)
+    return () => observer.disconnect()
+  }, [children])
+
+  // Only the first half's first copy carries the ref — one measured node, not two.
+  const buildHalf = (measured) =>
+    Array.from({ length: repeats }, (_, i) => (
+      <div
+        key={i}
+        ref={measured && i === 0 ? copyRef : undefined}
+        className="flex shrink-0 items-center"
+      >
+        {children}
+      </div>
+    ))
+
   return (
     <div
+      ref={containerRef}
       className={`overflow-hidden ${pauseOnHover ? 'marquee-paused' : ''} ${className}`}
       aria-hidden="true"
     >
-      <div className="marquee-track" style={{ '--marquee-duration': `${duration}s` }}>
-        <div className="flex shrink-0 items-center">{children}</div>
-        <div className="flex shrink-0 items-center">{children}</div>
+      <div
+        className="marquee-track"
+        style={{ '--marquee-duration': `${duration * repeats}s` }}
+      >
+        <div className="flex shrink-0 items-center">{buildHalf(true)}</div>
+        <div className="flex shrink-0 items-center">{buildHalf(false)}</div>
       </div>
     </div>
   )

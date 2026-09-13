@@ -43,10 +43,14 @@ export default function Testimonials() {
     return () => clearInterval(timer)
   }, [paused, total])
 
+  // Without the quote carousel the roster ticker is the last thing in the section, so
+  // the usual bottom padding would leave it floating above dead space.
+  const padding = total === 0 ? 'pb-0' : 'pb-20 md:pb-32'
+
   return (
     <section
       id="clients"
-      className="scroll-mt-24 border-y border-line bg-paper-2 py-20 md:py-32"
+      className={`scroll-mt-24 border-y border-line bg-paper-2 pt-20 md:pt-32 ${padding}`}
     >
       <div className="shell">
         {total === 0 ? (
