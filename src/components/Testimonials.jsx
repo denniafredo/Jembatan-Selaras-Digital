@@ -35,7 +35,7 @@ export default function Testimonials() {
   const go = (next) => setIndex((next + total) % total)
 
   useEffect(() => {
-    if (paused) return
+    if (paused || !total) return
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) return
 
@@ -49,6 +49,24 @@ export default function Testimonials() {
       className="scroll-mt-24 border-y border-line bg-paper-2 py-20 md:py-32"
     >
       <div className="shell">
+        {total === 0 ? (
+          <div className="max-w-2xl">
+            <Reveal>
+              <span className="eyebrow">Clients</span>
+            </Reveal>
+            <Reveal delay={80}>
+              <h2 className="mt-6 text-title font-extrabold text-ink-900">
+                The companies we are building for.
+              </h2>
+            </Reveal>
+            <Reveal delay={160}>
+              <p className="mt-6 text-base leading-relaxed text-ink md:text-lg">
+                Early clients who handed a new studio work that had to ship — and go on shipping
+                after we hand it back.
+              </p>
+            </Reveal>
+          </div>
+        ) : (
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <Reveal>
@@ -127,6 +145,7 @@ export default function Testimonials() {
             </div>
           </Reveal>
         </div>
+        )}
       </div>
 
       {/* Client roster ticker */}

@@ -25,7 +25,7 @@ Placeholders you should replace before going live:
 | Email, phone, WhatsApp, address | `company` |
 | Social links | `company.social` |
 | Project case studies | `projects` |
-| Testimonial quotes and names | `testimonials` |
+| Testimonial quotes and names | `testimonials` — empty hides the carousel |
 | Client roster in the ticker | `clients` |
 | Stats row in About | `stats` — counted from `projects`/`clients`/`services`, so edit those |
 

@@ -178,26 +178,9 @@ export const projects = [
   },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      'They asked about our sales process before they asked about our colour palette. That told us everything. The site they built now brings in more qualified leads in a week than we used to find in a month.',
-    name: 'Andreas Wijaya',
-    role: 'Marketing Director, Arta Sentosa Group',
-  },
-  {
-    quote:
-      'Our old portal took nine seconds to open on a phone out in the field. The team rebuilt it and it opens instantly now. Our drivers stopped calling the office to complain.',
-    name: 'Ratna Puspita',
-    role: 'Head of Operations, Nusantara Logistics',
-  },
-  {
-    quote:
-      'Clear plan, weekly demos, no surprises in the invoice. We have worked with four agencies before this one. It is the first handover where we actually understood the code we received.',
-    name: 'Michael Tanuwijaya',
-    role: 'CTO, Mitra Retail Indonesia',
-  },
-];
+// Real client quotes only. While this is empty the Clients section hides the
+// carousel and shows just the roster below — no invented testimonials.
+export const testimonials = [];
 
 export const clients = [
   'Pandji Hati Mulia',
