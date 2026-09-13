@@ -7,7 +7,7 @@ export const company = {
   name: 'Jembatan Selaras Digital',
   short: 'JSD',
   tagline: 'Digital Product Studio',
-  email: 'hello@jembatanselarasdigital.com',
+  email: 'jembatanselarasdigital@gmail.com',
   phone: '+62 21 5000 1234',
   whatsapp: '+62 812 3456 7890',
   address: 'Jl. Jenderal Sudirman Kav. 52, Jakarta Selatan 12190, Indonesia',
@@ -18,7 +18,7 @@ export const company = {
     { label: 'Dribbble', href: 'https://dribbble.com/' },
     { label: 'GitHub', href: 'https://github.com/' },
   ],
-}
+};
 
 export const nav = [
   { label: 'Services', href: '#services' },
@@ -26,7 +26,7 @@ export const nav = [
   { label: 'Work', href: '#work' },
   { label: 'Clients', href: '#clients' },
   { label: 'Contact', href: '#contact' },
-]
+];
 
 export const hero = {
   eyebrow: 'Digital Product Studio · Jakarta',
@@ -36,7 +36,7 @@ export const hero = {
   ctaPrimary: { label: 'Let us talk', href: '#contact' },
   ctaSecondary: { label: 'See our work', href: '#work' },
   badges: ['Web Development', 'UI/UX Design', 'Mobile-First', 'Performance'],
-}
+};
 
 export const marqueeWords = [
   'Web Development',
@@ -46,7 +46,7 @@ export const marqueeWords = [
   'Brand Identity',
   'System Integration',
   'Digital Strategy',
-]
+];
 
 /**
  * The performance & mobile message — the core belief the studio sells on.
@@ -65,7 +65,7 @@ export const manifesto = {
     { value: '100%', label: 'Responsive down to 320px' },
     { value: 'AA', label: 'WCAG accessibility baseline' },
   ],
-}
+};
 
 export const services = [
   {
@@ -106,7 +106,7 @@ export const services = [
       'Audits and ongoing care that keep your site fast, secure, and online — with numbers you can show your stakeholders.',
     points: ['Core Web Vitals audit', 'Speed optimisation', 'Security patching', 'Monitoring & support'],
   },
-]
+];
 
 export const about = {
   eyebrow: 'About us',
@@ -129,14 +129,14 @@ export const about = {
       text: 'Documented, conventional code. You keep the repository, the accounts, and the option to leave.',
     },
   ],
-}
+};
 
 export const stats = [
   { value: 120, suffix: '+', label: 'Projects delivered' },
   { value: 60, suffix: '+', label: 'Clients across Indonesia' },
   { value: 7, suffix: ' yrs', label: 'Building digital products' },
   { value: 98, suffix: '%', label: 'Clients who come back' },
-]
+];
 
 export const projects = [
   {
@@ -175,7 +175,7 @@ export const projects = [
     result: '12 outlets in one live view',
     tags: ['React', 'Charts', 'REST API'],
   },
-]
+];
 
 export const testimonials = [
   {
@@ -196,23 +196,16 @@ export const testimonials = [
     name: 'Michael Tanuwijaya',
     role: 'CTO, Mitra Retail Indonesia',
   },
-]
+];
 
 export const clients = [
-  'Nusantara Logistics',
-  'Arta Sentosa',
-  'Selaras Health',
-  'Mitra Retail',
-  'Bumi Energi',
-  'Cahaya Finansial',
-  'Graha Properti',
-  'Sinar Manufaktur',
-]
+  'Pandji Hati Mulia',
+  'Rimini',
+];
 
 export const contact = {
   eyebrow: 'Contact',
   title: 'Tell us what you are trying to build.',
-  body: 'Send a short brief and we will reply within one business day with an honest read on scope, timeline, and budget range — before any proposal.',
-  budgets: ['Below Rp 25 jt', 'Rp 25 – 75 jt', 'Rp 75 – 200 jt', 'Above Rp 200 jt'],
+  body: 'Send a short brief and we will reply within one business day with an honest read on scope and timeline — before any proposal.',
   interests: ['Company Profile', 'Web Application', 'UI/UX Design', 'Performance Audit'],
-}
+};

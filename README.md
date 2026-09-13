@@ -28,7 +28,6 @@ Placeholders you should replace before going live:
 | Testimonial quotes and names | `testimonials` |
 | Client roster in the ticker | `clients` |
 | Stats (120+, 60+, 7 yrs, 98%) | `stats` |
-| Budget ranges in the form | `contact.budgets` |
 
 ## Sections
 
@@ -57,7 +56,7 @@ The form has no backend. Two options:
    ```
 
    The form then POSTs JSON (`name`, `company`, `email`, `phone`, `interest`,
-   `budget`, `message`) to that URL.
+   `message`) to that URL.
 
 ## Brand
 

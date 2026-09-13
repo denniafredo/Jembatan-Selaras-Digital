@@ -15,7 +15,6 @@ const field =
 export default function Contact() {
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
   const [interest, setInterest] = useState(contact.interests[0])
-  const [budget, setBudget] = useState(contact.budgets[1])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -29,7 +28,6 @@ export default function Contact() {
         `Email: ${data.email}`,
         `Phone: ${data.phone || '-'}`,
         `Interest: ${data.interest}`,
-        `Budget: ${data.budget}`,
         '',
         data.message,
       ].join('\n')
@@ -189,28 +187,6 @@ export default function Contact() {
                       aria-pressed={interest === item}
                       className={`rounded-full border px-4 py-2 text-[0.78rem] font-bold transition-colors ${
                         interest === item
-                          ? 'border-brand bg-brand text-white'
-                          : 'border-line bg-white text-ink hover:border-brand hover:text-brand'
-                      }`}
-                    >
-                      {item}
-                    </button>
-                  ))}
-                </div>
-              </fieldset>
-
-              <fieldset className="mt-7">
-                <legend className="mb-3 text-sm font-bold text-ink-900">Budget range</legend>
-                <input type="hidden" name="budget" value={budget} />
-                <div className="flex flex-wrap gap-2">
-                  {contact.budgets.map((item) => (
-                    <button
-                      key={item}
-                      type="button"
-                      onClick={() => setBudget(item)}
-                      aria-pressed={budget === item}
-                      className={`rounded-full border px-4 py-2 text-[0.78rem] font-bold transition-colors ${
-                        budget === item
                           ? 'border-brand bg-brand text-white'
                           : 'border-line bg-white text-ink hover:border-brand hover:text-brand'
                       }`}
