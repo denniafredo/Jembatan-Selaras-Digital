@@ -1,6 +1,5 @@
 import { Reveal, Button, Marquee } from './ui'
-import { LogoMark } from './Logo'
-import { hero, marqueeWords, company } from '../data/site'
+import { hero, marqueeWords, company, process } from '../data/site'
 
 /**
  * Decorative bridge span — echoes the logo mark, drawn as SVG so it costs nothing to load.
@@ -147,18 +146,40 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bridge panel */}
+      {/* Bridge panel — the four stages of a project, laid out along the span */}
       <Reveal delay={160} className="shell mt-14">
-        <div className="relative h-[215px] overflow-hidden rounded-[28px] border border-line bg-gradient-to-b from-paper-2 to-white sm:h-[320px] md:h-[400px]">
-          <BridgeArt />
+        <div className="relative flex flex-col justify-center overflow-hidden rounded-[28px] border border-line bg-gradient-to-b from-paper-2 to-white md:min-h-[400px]">
+          {/* The span is wide and short, so on phones it is kept as a band along the
+              bottom — stretched to full height it would crop past both towers. */}
+          <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[170px] md:inset-0 md:h-full">
+            <BridgeArt />
+          </div>
 
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex flex-col items-center rounded-2xl border border-line/80 bg-white/80 px-6 py-5 backdrop-blur-md md:rounded-3xl md:px-8 md:py-7">
-              <LogoMark className="h-11 w-11 md:h-16 md:w-16" />
-              <p className="mt-2.5 text-center text-[0.6rem] font-bold uppercase tracking-[0.24em] text-muted md:mt-3 md:text-[0.68rem] md:tracking-[0.28em]">
-                {company.tagline}
-              </p>
-            </div>
+          <div className="relative px-5 pb-12 pt-9 md:px-10 md:pb-16 md:pt-14">
+            <p className="text-center text-[0.62rem] font-bold uppercase tracking-[0.24em] text-muted md:text-[0.68rem] md:tracking-[0.28em]">
+              How a project crosses
+            </p>
+
+            <ol className="mt-7 grid grid-cols-2 gap-3 md:mt-11 md:grid-cols-4 md:gap-5">
+              {process.map((stage, i) => (
+                <Reveal
+                  key={stage.step}
+                  as="li"
+                  delay={220 + i * 90}
+                  className="rounded-2xl border border-line/80 bg-white/85 px-4 py-4 backdrop-blur-md md:px-5 md:py-6"
+                >
+                  <span className="text-[0.68rem] font-extrabold tracking-[0.18em] text-brand">
+                    {stage.step}
+                  </span>
+                  <p className="mt-1.5 text-base font-extrabold tracking-tight text-ink-900 md:text-lg">
+                    {stage.title}
+                  </p>
+                  <p className="mt-1.5 text-[0.78rem] leading-relaxed text-ink md:mt-2 md:text-sm">
+                    {stage.text}
+                  </p>
+                </Reveal>
+              ))}
+            </ol>
           </div>
         </div>
       </Reveal>

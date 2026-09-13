@@ -34,11 +34,35 @@ export const hero = {
   // Word inside the last headline line that is painted in the brand colour.
   headlineAccent: 'powers',
   intro:
-    'Jembatan Selaras Digital designs and engineers websites, web apps, and digital products that load fast, work on every phone, and turn visitors into customers.',
+    'Jembatan Selaras Digital designs, tailors, and builds technology around the way your business actually works — from the website your customers see to the systems your team runs on.',
   ctaPrimary: { label: 'Let us talk', href: '#contact' },
   ctaSecondary: { label: 'See our work', href: '#work' },
   badges: ['Web Development', 'UI/UX Design', 'Mobile-First', 'Performance'],
 };
+
+// The four stages shown along the bridge span in the hero.
+export const process = [
+  {
+    step: '01',
+    title: 'Discover',
+    text: 'We learn how the business actually runs before anyone opens a design file.',
+  },
+  {
+    step: '02',
+    title: 'Design',
+    text: 'Screens drawn on a phone first and reviewed with you, not unveiled at the end.',
+  },
+  {
+    step: '03',
+    title: 'Build',
+    text: 'Engineered in the open, deployed early, tested on the devices your customers own.',
+  },
+  {
+    step: '04',
+    title: 'Handover',
+    text: 'Documentation, accounts, and the repository. You own every part of it.',
+  },
+];
 
 export const marqueeWords = [
   'Web Development',
