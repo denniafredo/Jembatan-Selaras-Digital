@@ -27,7 +27,7 @@ Placeholders you should replace before going live:
 | Project case studies | `projects` |
 | Testimonial quotes and names | `testimonials` |
 | Client roster in the ticker | `clients` |
-| Stats (120+, 60+, 7 yrs, 98%) | `stats` |
+| Stats row in About | `stats` — counted from `projects`/`clients`/`services`, so edit those |
 
 ## Sections
 

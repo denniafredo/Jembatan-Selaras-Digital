@@ -30,7 +30,9 @@ export const nav = [
 
 export const hero = {
   eyebrow: 'Digital Product Studio · Jakarta',
-  headline: ['We build the bridge', 'between your business', 'and the people who', 'need it.'],
+  headline: ['We build the bridge', 'between your business', 'and the technology', 'that powers it.'],
+  // Word inside the last headline line that is painted in the brand colour.
+  headlineAccent: 'powers',
   intro:
     'Jembatan Selaras Digital designs and engineers websites, web apps, and digital products that load fast, work on every phone, and turn visitors into customers.',
   ctaPrimary: { label: 'Let us talk', href: '#contact' },
@@ -131,49 +133,24 @@ export const about = {
   ],
 };
 
-export const stats = [
-  { value: 120, suffix: '+', label: 'Projects delivered' },
-  { value: 60, suffix: '+', label: 'Clients across Indonesia' },
-  { value: 7, suffix: ' yrs', label: 'Building digital products' },
-  { value: 98, suffix: '%', label: 'Clients who come back' },
-];
-
 export const projects = [
   {
-    title: 'Nusantara Logistics Portal',
-    category: 'Web Application',
-    year: '2025',
+    title: 'Pandji Hati Mulia',
+    category: 'Mobile App',
+    year: '2026',
     summary:
-      'A shipment tracking portal replacing three spreadsheets and a WhatsApp group, used daily by 400 field staff.',
-    result: 'Manual reporting time cut by 70%',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
+      'A Flutter app that takes a field sales team off paper. Visits, orders, and stock notes are filed from the phone, in the store, before the salesman walks back to the car.',
+    result: 'Recaps that used to wait until the end of the week now land the moment a visit ends.',
+    tags: ['Flutter', 'REST API'],
   },
   {
-    title: 'Arta Sentosa Corporate Site',
-    category: 'Company Profile',
-    year: '2025',
+    title: 'Rimini',
+    category: 'WordPress Site',
+    year: '2026',
     summary:
-      'A multi-language corporate site for a manufacturing group, rebuilt from a nine-second page into a sub-two-second one.',
-    result: 'Load time 9.1s to 1.4s',
-    tags: ['Next.js', 'Headless CMS', 'SEO'],
-  },
-  {
-    title: 'Selaras Health Booking',
-    category: 'UI/UX & Build',
-    year: '2024',
-    summary:
-      'An appointment booking flow for a clinic network, redesigned around what patients actually do on a phone.',
-    result: 'Booking completion up 42%',
-    tags: ['Figma', 'React', 'Design System'],
-  },
-  {
-    title: 'Mitra Retail Dashboard',
-    category: 'Web Application',
-    year: '2024',
-    summary:
-      'A merchant analytics dashboard consolidating sales from twelve outlets into one live view for the owners.',
-    result: '12 outlets in one live view',
-    tags: ['React', 'Charts', 'REST API'],
+      'A WordPress storefront for a clothing label, rebuilt around the product. The catalogue opens quickly on a phone connection and every piece is given room to be looked at.',
+    result: 'Lighter pages, a calmer layout, and a catalogue search engines can finally read.',
+    tags: ['WordPress', 'SEO'],
   },
 ];
 
@@ -201,6 +178,14 @@ export const testimonials = [
 export const clients = [
   'Pandji Hati Mulia',
   'Rimini',
+];
+
+// Counted from the real arrays above, so the numbers can never drift from the work shown.
+export const stats = [
+  { value: projects.length, suffix: '', label: 'Projects delivered' },
+  { value: clients.length, suffix: '', label: 'Clients served' },
+  { value: 1, suffix: 'st yr', label: 'Studio founded in Jakarta, 2026' },
+  { value: services.length, suffix: '', label: 'Service lines, from design to maintenance' },
 ];
 
 export const contact = {

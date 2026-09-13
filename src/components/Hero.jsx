@@ -83,6 +83,19 @@ function BridgeArt() {
   )
 }
 
+/** Paints `accent` in the brand colour inside `line`; renders the line as-is if absent. */
+function accentuate(line, accent) {
+  if (!accent || !line.includes(accent)) return line
+  const [before, ...rest] = line.split(accent)
+  return (
+    <>
+      {before}
+      <span className="text-brand">{accent}</span>
+      {rest.join(accent)}
+    </>
+  )
+}
+
 export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-[104px] md:pt-32">
@@ -100,13 +113,7 @@ export default function Hero() {
         <h1 className="mt-6 max-w-6xl text-display font-extrabold text-ink-900">
           {hero.headline.map((line, i) => (
             <Reveal key={line} as="span" delay={i * 90} className="block">
-              {i === hero.headline.length - 1 ? (
-                <>
-                  <span className="text-brand">need</span> it.
-                </>
-              ) : (
-                line
-              )}
+              {i === hero.headline.length - 1 ? accentuate(line, hero.headlineAccent) : line}
             </Reveal>
           ))}
         </h1>
