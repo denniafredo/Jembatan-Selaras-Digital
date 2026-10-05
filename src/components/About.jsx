@@ -14,7 +14,7 @@ export default function About() {
                 aria-hidden="true"
                 className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-brand/8 blur-2xl"
               />
-              <LogoLockup motion="inview" className="relative w-56 md:w-64" />
+              <LogoLockup motion="inview" className="relative mx-auto w-56 md:w-64" />
 
               <p className="relative mt-10 text-xl font-bold leading-snug tracking-tight text-ink-900 md:text-2xl">
                 Connected. Aligned. Growing.

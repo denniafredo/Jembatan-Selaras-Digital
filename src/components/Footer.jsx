@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="shell py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-5">
-            <Logo mono className="text-white" />
+            <Logo mono motion="inview" animateText className="text-white" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted">
               A digital product studio in Jakarta. We design and build websites and applications
               that load fast, work on every phone, and hold up after launch.

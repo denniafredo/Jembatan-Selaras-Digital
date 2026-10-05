@@ -27,11 +27,14 @@ import {
  * Motion lives in index.css (the jsd-* keyframes); components only set data-motion:
  *   motion="intro"   build once on mount
  *   motion="inview"  build once when scrolled into view
- *   redraw           bump this number to re-draw the arc (hover / focus)
+ *   loop             while true, play the build over and over (hover / focus)
  */
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-function useLogoMotion(motion, redraw, isBuildEnd) {
+// How long a looping mark rests, finished, before it builds again.
+const LOOP_REST_MS = 800
+
+function useLogoMotion(motion, loop, isBuildEnd) {
   const ref = useRef(null)
   const [state, setState] = useState(() => {
     if (!motion || prefersReducedMotion()) return 'idle'
@@ -39,6 +42,8 @@ function useLogoMotion(motion, redraw, isBuildEnd) {
   })
   const stateRef = useRef(state)
   stateRef.current = state
+  const loopRef = useRef(loop)
+  loopRef.current = loop
 
   useEffect(() => {
     if (state !== 'pending') return
@@ -64,13 +69,22 @@ function useLogoMotion(motion, redraw, isBuildEnd) {
     }
   }, [state])
 
-  // Only an idle mark re-draws: never cut into the build.
+  // Only an idle mark starts a loop: never cut into a build. A build already running just
+  // rolls into the loop when it ends.
   useEffect(() => {
-    if (redraw && stateRef.current === 'idle' && !prefersReducedMotion()) setState('redraw')
-  }, [redraw])
+    if (loop && stateRef.current === 'idle' && !prefersReducedMotion()) setState('intro')
+  }, [loop])
 
+  // Rest on the finished mark, then build again unless the loop was released meanwhile.
+  useEffect(() => {
+    if (state !== 'rest') return
+    const timer = setTimeout(() => setState(loopRef.current ? 'intro' : 'idle'), LOOP_REST_MS)
+    return () => clearTimeout(timer)
+  }, [state])
+
+  // Releasing the loop mid-build lets that build finish, so the mark never snaps.
   const onAnimationEnd = (e) => {
-    if (isBuildEnd(e) || e.animationName === 'jsd-arc-redraw') setState('idle')
+    if (isBuildEnd(e)) setState(loopRef.current ? 'rest' : 'idle')
   }
 
   return { ref, state, onAnimationEnd }
@@ -156,21 +170,20 @@ const colors = (mono) => ({
 // Every mark animation shares one clock, so the deck ending means the build is done.
 const markBuildEnd = (e) => e.animationName === 'jsd-deck'
 
-export function LogoMark({ className = 'h-10 w-10', mono = false, motion, redraw = 0 }) {
+/** The bare mark: whoever owns its motion puts .jsd-mark + data-motion on it or an ancestor. */
+function MarkSvg({ className, mono, svgRef, ...rest }) {
   const id = useId().replace(/:/g, '')
-  const { ref, state, onAnimationEnd } = useLogoMotion(motion, redraw, markBuildEnd)
   const { gray, blue } = colors(mono)
 
   return (
     <svg
-      ref={ref}
+      ref={svgRef}
       viewBox={VIEW_BOX}
-      className={`jsd-mark ${className}`}
-      data-motion={state}
-      onAnimationEnd={onAnimationEnd}
+      className={className}
       role="img"
       aria-label="Jembatan Selaras Digital"
       xmlns="http://www.w3.org/2000/svg"
+      {...rest}
     >
       <defs>
         <MarkDefs id={id} />
@@ -180,17 +193,32 @@ export function LogoMark({ className = 'h-10 w-10', mono = false, motion, redraw
   )
 }
 
+export function LogoMark({ className = 'h-10 w-10', mono = false, motion, loop = false }) {
+  const { ref, state, onAnimationEnd } = useLogoMotion(motion, loop, markBuildEnd)
+
+  return (
+    <MarkSvg
+      svgRef={ref}
+      className={`jsd-mark ${className}`}
+      mono={mono}
+      data-motion={state}
+      onAnimationEnd={onAnimationEnd}
+    />
+  )
+}
+
 // The wordmark finishes last: the final DIGITAL letter ends the build.
 const lockupBuildEnd = (e) => e.animationName === 'jsd-letter' && 'last' in e.target.dataset
 
 /**
  * Stacked lockup: mark above JEMBATAN SELARAS / DIGITAL (Montserrat outlines, no font request).
  * The build adds the wordmark after the mark: line 1 is written left to right, then each
- * DIGITAL letter rises out of its baseline.
+ * DIGITAL letter rises out of its baseline. Hovering it loops the whole build.
  */
-export function LogoLockup({ className = 'w-64', mono = false, motion, redraw = 0 }) {
+export function LogoLockup({ className = 'w-64', mono = false, motion }) {
   const id = useId().replace(/:/g, '')
-  const { ref, state, onAnimationEnd } = useLogoMotion(motion, redraw, lockupBuildEnd)
+  const [hovered, setHovered] = useState(false)
+  const { ref, state, onAnimationEnd } = useLogoMotion(motion, hovered, lockupBuildEnd)
   const { gray, blue } = colors(mono)
 
   return (
@@ -200,6 +228,8 @@ export function LogoLockup({ className = 'w-64', mono = false, motion, redraw = 
       className={`jsd-mark jsd-lockup ${className}`}
       data-motion={state}
       onAnimationEnd={onAnimationEnd}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
       role="img"
       aria-label="Jembatan Selaras Digital"
       xmlns="http://www.w3.org/2000/svg"
@@ -232,32 +262,71 @@ export function LogoLockup({ className = 'w-64', mono = false, motion, redraw = 
   )
 }
 
+/** One span per letter so each can rise on its own (jsd-letter); screen readers get the word. */
+function RisingLetters({ text }) {
+  const letters = [...text]
+
+  return (
+    <>
+      <span aria-hidden="true">
+        {letters.map((letter, i) => (
+          <span
+            key={i}
+            className="jsd-letter inline-block"
+            style={{ '--i': i }}
+            data-last={i === letters.length - 1 ? '' : undefined}
+          >
+            {letter}
+          </span>
+        ))}
+      </span>
+      <span className="sr-only">{text}</span>
+    </>
+  )
+}
+
 /**
- * Mark + wordmark. Hovering (or keyboard-focusing) the lockup re-draws the arc.
- * Pass `href` to render it as a link; `intro` builds the mark once on mount.
+ * Mark + wordmark, side by side. The motion state sits on the whole lockup, so with
+ * `animateText` the wordmark joins the build exactly as in LogoLockup (line 1 written left to
+ * right, then each DIGITAL letter rising); without it only the mark moves.
+ * While hovered (or keyboard-focused) the build loops. Pass `href` to render it as a link;
+ * `motion` ("intro" / "inview") builds it once.
  */
-export function Logo({ className = '', compact = false, mono = false, intro = false, href, ...rest }) {
-  const [redraw, setRedraw] = useState(0)
-  const replay = () => setRedraw((n) => n + 1)
+export function Logo({
+  className = '',
+  compact = false,
+  mono = false,
+  motion,
+  animateText = false,
+  href,
+  ...rest
+}) {
+  const [hovered, setHovered] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const { ref, state, onAnimationEnd } = useLogoMotion(
+    motion,
+    hovered || focused,
+    animateText ? lockupBuildEnd : markBuildEnd,
+  )
   const Tag = href ? 'a' : 'span'
 
   return (
     <Tag
+      ref={ref}
       href={href}
-      className={`inline-flex items-center gap-2.5 ${className}`}
-      onPointerEnter={replay}
-      onFocus={(e) => e.currentTarget.matches(':focus-visible') && replay()}
+      className={`jsd-mark ${animateText ? 'jsd-lockup ' : ''}inline-flex items-center gap-2.5 ${className}`}
+      data-motion={state}
+      onAnimationEnd={onAnimationEnd}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+      onFocus={(e) => setFocused(e.currentTarget.matches(':focus-visible'))}
+      onBlur={() => setFocused(false)}
       {...rest}
     >
-      <LogoMark
-        className={compact ? 'h-9 w-9' : 'h-11 w-11'}
-        mono={mono}
-        motion={intro ? 'intro' : undefined}
-        redraw={redraw}
-      />
+      <MarkSvg className={compact ? 'h-9 w-9' : 'h-11 w-11'} mono={mono} />
       <span className="flex flex-col leading-none">
         <span
-          className={`font-extrabold tracking-tight ${
+          className={`${animateText ? 'jsd-word-1 ' : ''}font-extrabold tracking-tight ${
             mono ? 'text-current' : 'text-ink-900'
           } ${compact ? 'text-[0.94rem]' : 'text-base'}`}
         >
@@ -268,7 +337,7 @@ export function Logo({ className = '', compact = false, mono = false, intro = fa
             mono ? 'text-current opacity-70' : 'text-muted'
           }`}
         >
-          Digital
+          {animateText ? <RisingLetters text="Digital" /> : 'Digital'}
         </span>
       </span>
     </Tag>

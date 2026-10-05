@@ -45,7 +45,7 @@ export default function Navbar() {
         }`}
       >
         <div className="shell flex h-[72px] items-center justify-between md:h-20">
-          <Logo compact intro href="#top" aria-label="Jembatan Selaras Digital — home" />
+          <Logo compact motion="intro" href="#top" aria-label="Jembatan Selaras Digital — home" />
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
             {nav.map((item) => (

@@ -21,8 +21,10 @@ Edit `motion.css` or the fit, then re-run the generators; never edit generated f
   launch"). Preset: **Trustworthy / Professional**: no squash, no overshoot, one easing family.
 - **Usage contexts:**
   - **Navbar:** builds once on page load.
-  - **About card:** the same build, once, when scrolled into view.
-  - **Hover / keyboard focus (navbar and footer lockups):** arc re-draw.
+  - **About card and footer:** the same build, once, when scrolled into view. Both include the wordmark (line 1
+    written left to right, then each DIGITAL letter rising); in the footer it is the HTML text beside the mark.
+  - **Hover / keyboard focus (navbar, footer and About lockups):** the full build loops, resting 800 ms on the finished
+    mark between passes; on leave the current pass finishes, then the logo stays static.
   - **Reduced motion:** the static logo, immediately.
 - **Choreography sketch:** the bridge is built, then harmony closes around it.
   1. The deck is laid from the centre out.
