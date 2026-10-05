@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" class="jsd-mark" data-motion="intro" role="img" aria-label="Jembatan Selaras Digital">
+  <title>Jembatan Selaras Digital</title>
+  <defs>
+    <clipPath id="rise-clip"><path d="M177.63 694.54C271.61 603.13 464.19 597.25 512 597.25C559.81 597.25 752.39 603.13 846.37 694.54V0H177.63Z"/></clipPath>
+    <mask id="cable-l-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024">
+      <path id="cable-l-pen" class="jsd-pen jsd-cable-pen" d="M446.08 246C445.44 264 445.18 282.67 444.16 300C443.15 317.33 442.66 334.17 440 350C437.33 365.83 433.76 378.33 428.17 395C422.58 411.67 415.99 430.83 406.46 450C396.92 469.17 386.08 490 370.96 510C355.84 530 335.41 552.5 315.74 570C296.08 587.5 272.23 602.76 252.97 615C233.72 627.24 210.89 637.32 200.21 643.43C189.53 649.54 192.67 648.93 188.91 651.68" fill="none" stroke="#fff" stroke-width="35" pathLength="1" stroke-dasharray="1 1"/>
+    </mask>
+    <mask id="cable-r-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024">
+      <path id="cable-r-pen" class="jsd-pen jsd-cable-pen" d="M577.92 246C578.56 264 578.82 282.67 579.84 300C580.85 317.33 581.34 334.17 584 350C586.67 365.83 590.24 378.33 595.83 395C601.42 411.67 608.01 430.83 617.54 450C627.08 469.17 637.92 490 653.04 510C668.16 530 688.59 552.5 708.26 570C727.92 587.5 751.77 602.76 771.03 615C790.28 627.24 813.11 637.32 823.79 643.43C834.47 649.54 831.33 648.93 835.09 651.68" fill="none" stroke="#fff" stroke-width="35" pathLength="1" stroke-dasharray="1 1"/>
+    </mask>
+    <mask id="arc-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024">
+      <path id="arc-pen-l" class="jsd-pen jsd-arc-pen" d="M226.23 629.26A315.56 313.14 0 0 1 520.26 183.41" fill="none" stroke="#fff" stroke-width="46" pathLength="1" stroke-dasharray="1 1"/>
+      <path id="arc-pen-r" class="jsd-pen jsd-arc-pen" d="M797.77 629.26A315.56 313.14 0 0 0 503.74 183.41" fill="none" stroke="#fff" stroke-width="46" pathLength="1" stroke-dasharray="1 1"/>
+    </mask>
+  </defs>
+  <g id="bridge" fill="#51626F">
+    <g clip-path="url(#rise-clip)">
+      <g id="tower" class="jsd-tower">
+        <path d="M444 254.5L459.1 254.5L461 286.14L461 615.5L441.8 615.5L441.8 380.5Z"/>
+        <path d="M580 254.5L564.9 254.5L563 286.14L563 615.5L582.2 615.5L582.2 380.5Z"/>
+        <rect x="457" y="286.14" width="110" height="22.12"/>
+        <rect x="457" y="386.4" width="110" height="24.18"/>
+        <rect x="457" y="491.8" width="110" height="24.15"/>
+      </g>
+    </g>
+    <path id="cable-l" class="jsd-cable" d="M444.23 254.5C444.23 254.58 441.9 328.99 419.99 394.7C367.93 550.8 261.63 597.7 196.98 645.79C253.97 620.94 386.95 578 441.8 376.64L447.8 330.5L448 260.5Z" mask="url(#cable-l-mask)"/>
+    <path id="cable-r" class="jsd-cable" d="M579.77 254.5C579.77 254.58 582.1 328.99 604.01 394.7C656.07 550.8 762.37 597.7 827.02 645.79C770.03 620.94 637.05 578 582.2 376.64L576.2 330.5L576 260.5Z" mask="url(#cable-r-mask)"/>
+    <rect x="408" y="433.5" width="11" height="179" id="hanger-l1" class="jsd-hanger jsd-hanger-1"/>
+    <rect x="368.25" y="505.5" width="9.8" height="113" id="hanger-l2" class="jsd-hanger jsd-hanger-2"/>
+    <rect x="328.55" y="552.5" width="9.5" height="74" id="hanger-l3" class="jsd-hanger jsd-hanger-3"/>
+    <rect x="605" y="433.5" width="11" height="179" id="hanger-r1" class="jsd-hanger jsd-hanger-1"/>
+    <rect x="645.95" y="505.5" width="9.8" height="113" id="hanger-r2" class="jsd-hanger jsd-hanger-2"/>
+    <rect x="685.95" y="552.5" width="9.5" height="74" id="hanger-r3" class="jsd-hanger jsd-hanger-3"/>
+  </g>
+  <path id="deck" class="jsd-deck" fill="#0E93D3" d="M177.63 691.54C271.61 600.13 464.19 594.25 512 594.25C559.81 594.25 752.39 600.13 846.37 691.54C849.86 700.62 761.77 634.34 512 634.34C262.23 634.34 174.14 700.62 177.63 691.54Z"/>
+  <path id="arc" class="jsd-arc" fill="#0E93D3" d="M207.58 620.03A330.5 325.68 0 1 1 816.42 620.03L793.37 605.49A300.61 300.61 0 1 0 230.63 605.49Z" mask="url(#arc-mask)"/>
+</svg>

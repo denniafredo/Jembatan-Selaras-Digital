@@ -102,7 +102,7 @@ export default function Work() {
                   className={`rounded-full border px-4 py-2 text-[0.78rem] font-bold transition-all duration-200 ${
                     active === category
                       ? 'border-brand bg-brand text-white'
-                      : 'border-line bg-white text-ink hover:border-brand hover:text-brand'
+                      : 'border-line bg-surface text-ink hover:border-brand hover:text-brand'
                   }`}
                 >
                   {category}
@@ -115,10 +115,10 @@ export default function Work() {
         <div className="mt-14 grid gap-6 md:mt-20 md:grid-cols-2 md:gap-8">
           {visible.map((project, i) => (
             <Reveal key={project.title} delay={(i % 2) * 90}>
-              <article className="group h-full overflow-hidden rounded-3xl border border-line bg-white transition-shadow duration-300 hover:shadow-xl hover:shadow-ink-900/5">
+              <article className="group h-full overflow-hidden rounded-3xl border border-line bg-surface transition-shadow duration-300 hover:shadow-xl hover:shadow-ink-900/5">
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <ProjectVisual index={i} />
-                  <span className="absolute left-5 top-5 rounded-full bg-white/95 px-3.5 py-1.5 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-ink-900">
+                  <span className="absolute left-5 top-5 rounded-full bg-white/95 px-3.5 py-1.5 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-night">
                     {project.category}
                   </span>
                 </div>
@@ -137,7 +137,7 @@ export default function Work() {
                     {project.summary}
                   </p>
 
-                  <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand-soft px-4 py-2 text-[0.78rem] font-bold text-brand-dark">
+                  <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand-soft px-4 py-2 text-[0.78rem] font-bold text-brand-ink">
                     <span className="h-1.5 w-1.5 rounded-full bg-brand" />
                     {project.result}
                   </p>

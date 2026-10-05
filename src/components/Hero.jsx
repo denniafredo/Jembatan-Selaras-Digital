@@ -18,7 +18,7 @@ const quad = (a, b, c, t) => (1 - t) ** 2 * a + 2 * (1 - t) * t * b + t ** 2 * c
 
 function Tower({ x }) {
   return (
-    <g fill="#6A7A87">
+    <g fill="var(--color-ink)">
       <rect x={x - 20} y="78" width="9" height={DECK_Y - 78} />
       <rect x={x + 11} y="78" width="9" height={DECK_Y - 78} />
       <rect x={x - 20} y="78" width="40" height="9" rx="2" />
@@ -47,15 +47,15 @@ function BridgeArt() {
     >
       <defs>
         <linearGradient id="jsd-water" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0E93D3" stopOpacity="0.18" />
-          <stop offset="100%" stopColor="#0E93D3" stopOpacity="0" />
+          <stop offset="0%" stopColor="var(--color-brand)" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="var(--color-brand)" stopOpacity="0" />
         </linearGradient>
       </defs>
 
       <rect x="0" y={DECK_Y} width="900" height={360 - DECK_Y} fill="url(#jsd-water)" />
 
       {/* Suspenders */}
-      <g stroke="#CDD9E0" strokeWidth="1.5">
+      <g stroke="var(--color-line)" strokeWidth="1.5">
         {suspenders.map((drop) => (
           <line key={drop.key} x1={drop.x} y1={drop.y} x2={drop.x} y2={DECK_Y} />
         ))}
@@ -67,14 +67,14 @@ function BridgeArt() {
           (c, i) =>
             `${i === 0 ? `M${c.p0[0]} ${c.p0[1]}` : ''} Q${c.p1[0]} ${c.p1[1]} ${c.p2[0]} ${c.p2[1]}`,
         ).join('')}
-        stroke="#98B0BE"
+        stroke="var(--color-muted)"
         strokeWidth="3.5"
         fill="none"
         strokeLinecap="round"
       />
 
       {/* Deck */}
-      <line x1="0" y1={DECK_Y} x2="900" y2={DECK_Y} stroke="#6A7A87" strokeWidth="3" />
+      <line x1="0" y1={DECK_Y} x2="900" y2={DECK_Y} stroke="var(--color-ink)" strokeWidth="3" />
 
       <Tower x={256} />
       <Tower x={656} />
@@ -133,7 +133,7 @@ export default function Hero() {
               {hero.badges.map((badge) => (
                 <span
                   key={badge}
-                  className="rounded-full border border-line bg-white px-4 py-2 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-ink"
+                  className="rounded-full border border-line bg-surface px-4 py-2 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-ink"
                 >
                   {badge}
                 </span>
@@ -148,7 +148,7 @@ export default function Hero() {
 
       {/* Bridge panel — the four stages of a project, laid out along the span */}
       <Reveal delay={160} className="shell mt-14">
-        <div className="relative flex flex-col justify-center overflow-hidden rounded-[28px] border border-line bg-gradient-to-b from-paper-2 to-white md:min-h-[400px]">
+        <div className="relative flex flex-col justify-center overflow-hidden rounded-[28px] border border-line bg-gradient-to-b from-paper-2 to-surface md:min-h-[400px]">
           {/* The span is wide and short, so on phones it is kept as a band along the
               bottom — stretched to full height it would crop past both towers. */}
           <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[170px] md:inset-0 md:h-full">
@@ -166,7 +166,7 @@ export default function Hero() {
                   key={stage.step}
                   as="li"
                   delay={220 + i * 90}
-                  className="rounded-2xl border border-line/80 bg-white/85 px-4 py-4 backdrop-blur-md md:px-5 md:py-6"
+                  className="rounded-2xl border border-line/80 bg-surface/85 px-4 py-4 backdrop-blur-md md:px-5 md:py-6"
                 >
                   <span className="text-[0.68rem] font-extrabold tracking-[0.18em] text-brand">
                     {stage.step}

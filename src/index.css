@@ -1,16 +1,24 @@
 @import 'tailwindcss';
 
+/* dark: utilities follow the theme toggle (<html data-theme>), not only the OS setting */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
 @theme {
   /* Brand palette — Jembatan Selaras Digital */
   --color-brand: #0e93d3; /* Primary Blue  — bridge & arcs */
   --color-brand-dark: #0b76ab;
   --color-brand-soft: #e7f4fb;
+  --color-brand-ink: #0b76ab; /* text on brand-soft chips */
   --color-ink: #6a7a87; /* Dark Gray-Blue — text & details */
   --color-ink-900: #2c3a44; /* deepened for body copy contrast */
   --color-muted: #98b0be; /* Muted Blue    — secondary */
   --color-line: #cdd9e0; /* Soft Blue-Gray — accent / borders */
   --color-paper: #fefefe; /* White         — background */
   --color-paper-2: #f4f7f9;
+  --color-surface: #ffffff; /* cards and inputs */
+  --color-night: #2c3a44; /* sections that stay dark in both themes */
+  --color-night-ink: #cdd9e0; /* soft text on night */
+  --color-logo-gray: #51626f; /* bridge + wordmark in the logo */
 
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system,
     'Segoe UI', Roboto, sans-serif;
@@ -24,6 +32,30 @@
   --text-title--letter-spacing: -0.03em;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * Dark theme: the same tokens, re-pointed. <html data-theme> is set before first paint by the
+ * inline script in index.html (saved choice, else the OS preference) and by <ThemeToggle>.
+ * Brand blue is unchanged so white-on-blue buttons keep their contrast.
+ */
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-brand-soft: #0f2c3d;
+  --color-brand-ink: #7cc6ec;
+  --color-ink: #9fb0bc;
+  --color-ink-900: #e3eaef;
+  --color-muted: #7d93a2;
+  --color-line: #233440;
+  --color-paper: #0c151b;
+  --color-paper-2: #111d25;
+  --color-surface: #15232d;
+  --color-night: #08111a;
+  --color-logo-gray: #c6d2db;
 }
 
 @layer base {
@@ -124,6 +156,211 @@
 .marquee-paused:hover .marquee-track {
   animation-play-state: paused;
 }
+
+/* logo-motion:start */
+/* Generated from brand/logo-motion/motion.css by gen_site_assets.py — edit there, then re-run. */
+@property --jsd-rise {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /*
+   * Jembatan Selaras Digital — logo motion (Pixel2Motion v2)
+   * Personality: steady · precise · harmonious  →  Trustworthy/Professional preset
+   * (no squash, no overshoot; one easing family).  See motion_spec.md.
+   *
+   * One shared 1000 ms clock: every intro part runs the full duration and its phase lives in
+   * the keyframe percentages, so ?t=<ms> seeks the whole choreography 1:1.
+   * Easing inside @keyframes is LITERAL on purpose: var() there is silently dropped (→ linear).
+   *
+   * States (on the <svg class="jsd-mark">):
+   *   data-motion="intro"    play the reveal       data-motion="pending"  hold the reveal's first frame
+   *   data-motion="redraw"   hover: arc re-draw     anything else          static logo
+   * The host only applies this file when the visitor has not asked for reduced motion.
+   *
+   * No compositor animations: a transform animation makes Chromium raster the whole SVG on a
+   * different path (edge anti-aliasing changes, then flips back when the animation detaches).
+   * So the tower rises through a registered custom property, and hangers drop with clip-path.
+   * The host must declare, at top level (outside any @media):
+   *   @property --jsd-rise { syntax: '<length>'; inherits: false; initial-value: 0px; }
+   */
+
+  .jsd-mark {
+    --p2m-duration: 1000ms;
+    --p2m-hover-duration: 280ms;
+    --p2m-ease-enter: cubic-bezier(0, 0, 0.2, 1); /* entrances: deck, tower, hangers */
+    --p2m-ease-settle: cubic-bezier(0.4, 0, 0.2, 1); /* draws: cables, arc */
+  }
+
+  .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-deck {
+    animation: jsd-deck var(--p2m-duration) linear both;
+  }
+  .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-tower {
+    transform: translateY(var(--jsd-rise));
+    animation: jsd-tower var(--p2m-duration) linear both;
+  }
+  .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-cable-pen {
+    animation: jsd-cable var(--p2m-duration) linear both;
+  }
+  .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-hanger-1 {
+    animation: jsd-hanger-1 var(--p2m-duration) linear both;
+  }
+  .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-hanger-2 {
+    animation: jsd-hanger-2 var(--p2m-duration) linear both;
+  }
+  .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-hanger-3 {
+    animation: jsd-hanger-3 var(--p2m-duration) linear both;
+  }
+  .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-arc-pen {
+    animation: jsd-arc var(--p2m-duration) linear both;
+  }
+  /* Lockup (mark + wordmark): the mark keeps its 1000 ms clock; the wordmark follows on a
+     1600 ms clock that starts at the same moment, so ?t=<ms> still seeks everything 1:1. */
+  .jsd-lockup {
+    --p2m-lockup-duration: 1600ms;
+  }
+  .jsd-lockup:is([data-motion='intro'], [data-motion='pending']) .jsd-word-1 {
+    animation: jsd-word-1 var(--p2m-lockup-duration) linear both;
+  }
+  .jsd-lockup:is([data-motion='intro'], [data-motion='pending']) .jsd-letter {
+    animation: jsd-letter 220ms cubic-bezier(0, 0, 0.2, 1) both; /* --p2m-ease-enter */
+    animation-delay: calc(1100ms + var(--i) * 45ms);
+  }
+
+  /* Same specificity as the rules above and later in the file, so it wins: the `animation`
+     shorthand there would otherwise reset play-state to running and build off-screen. */
+  .jsd-mark[data-motion='pending']
+    :is(.jsd-deck, .jsd-tower, .jsd-cable-pen, .jsd-hanger, .jsd-arc-pen, .jsd-word-1, .jsd-letter) {
+    animation-play-state: paused;
+  }
+
+  /* Hover: the arc closes again at 2x the reveal's pace (ease-out only at this length). */
+  .jsd-mark[data-motion='redraw'] .jsd-arc-pen {
+    animation: jsd-arc-redraw var(--p2m-hover-duration) cubic-bezier(0, 0, 0.2, 1) both;
+  }
+
+  /* 60-300 ms — the deck is laid from the centre out to both banks (staging the ground line). */
+  @keyframes jsd-deck {
+    0%,
+    6% {
+      clip-path: inset(0 50% 0 50%);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+    }
+    30%,
+    100% {
+      clip-path: inset(-10% -1% -10% -1%);
+    }
+  }
+
+  /* 140-440 ms — the tower rises out of the deck (clipped under the deck's top edge). */
+  @keyframes jsd-tower {
+    0%,
+    14% {
+      --jsd-rise: 350px;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+    }
+    44%,
+    100% {
+      --jsd-rise: 0px;
+    }
+  }
+
+  /* 420-740 ms — both cables are drawn from the tower tops down to the deck ends,
+     starting only once the tower is home (< 1 unit away) so nothing detaches. */
+  @keyframes jsd-cable {
+    0%,
+    42% {
+      stroke-dashoffset: 1;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* --p2m-ease-settle */
+    }
+    74%,
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Hangers drop the moment the cable pen passes them (517 / 537 / 555 ms; timeline.py). */
+  @keyframes jsd-hanger-1 {
+    0%,
+    51.7% {
+      clip-path: inset(0 0 100% 0); /* drops from the cable */
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+    }
+    66.7%,
+    100% {
+      clip-path: inset(-1% -10% -1% -10%);
+    }
+  }
+  @keyframes jsd-hanger-2 {
+    0%,
+    53.7% {
+      clip-path: inset(0 0 100% 0); /* drops from the cable */
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+    }
+    68.7%,
+    100% {
+      clip-path: inset(-1% -10% -1% -10%);
+    }
+  }
+  @keyframes jsd-hanger-3 {
+    0%,
+    55.5% {
+      clip-path: inset(0 0 100% 0); /* drops from the cable */
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+    }
+    70.5%,
+    100% {
+      clip-path: inset(-1% -10% -1% -10%);
+    }
+  }
+
+  /* 480-1000 ms — the two halves of the arc rise from the banks and meet at the top (~930 ms). */
+  @keyframes jsd-arc {
+    0%,
+    48% {
+      stroke-dashoffset: 1;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* --p2m-ease-settle */
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Lockup 800-1250 ms — line 1 is written left to right (reading order) as the ring closes. */
+  @keyframes jsd-word-1 {
+    0%,
+    50% {
+      clip-path: inset(-10% 100% -10% -2%);
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* --p2m-ease-settle */
+    }
+    78.125%,
+    100% {
+      clip-path: inset(-10% -2% -10% -2%);
+    }
+  }
+
+  /* Lockup 1100-1590 ms — each DIGITAL letter rises out of its baseline, 45 ms apart. */
+  @keyframes jsd-letter {
+    from {
+      clip-path: inset(100% -10% -10% -10%);
+    }
+    to {
+      clip-path: inset(-10%);
+    }
+  }
+
+  @keyframes jsd-arc-redraw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+/* logo-motion:end */
 
 @media (prefers-reduced-motion: reduce) {
   html {

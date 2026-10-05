@@ -1,0 +1,36 @@
+{
+  "html": "logo_motion.html",
+  "times_ms": [
+    0,
+    60,
+    200,
+    300,
+    420,
+    445,
+    517,
+    537,
+    555,
+    600,
+    740,
+    850,
+    930,
+    1000
+  ],
+  "frames": [
+    "outputs\\motion_frames\\frame_000000ms.png",
+    "outputs\\motion_frames\\frame_000060ms.png",
+    "outputs\\motion_frames\\frame_000200ms.png",
+    "outputs\\motion_frames\\frame_000300ms.png",
+    "outputs\\motion_frames\\frame_000420ms.png",
+    "outputs\\motion_frames\\frame_000445ms.png",
+    "outputs\\motion_frames\\frame_000517ms.png",
+    "outputs\\motion_frames\\frame_000537ms.png",
+    "outputs\\motion_frames\\frame_000555ms.png",
+    "outputs\\motion_frames\\frame_000600ms.png",
+    "outputs\\motion_frames\\frame_000740ms.png",
+    "outputs\\motion_frames\\frame_000850ms.png",
+    "outputs\\motion_frames\\frame_000930ms.png",
+    "outputs\\motion_frames\\frame_001000ms.png"
+  ],
+  "strip": "outputs\\motion_strip.png"
+}

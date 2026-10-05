@@ -1,0 +1,24 @@
+{
+  "segment_count": 4,
+  "cubic_segments": 4,
+  "line_segments": 0,
+  "closed": true,
+  "budget": null,
+  "over_budget": false,
+  "median_segment_length": 355.759,
+  "short_segment_warnings": [],
+  "join_angle_threshold_degrees": 8.0,
+  "join_angle_warnings": [
+    {
+      "join_after_segment": 2,
+      "angle_degrees": 24.769
+    },
+    {
+      "join_after_segment": 4,
+      "angle_degrees": 24.769
+    }
+  ],
+  "input_svg": "outputs\\fit_work\\audit_deck.svg",
+  "selected_path_index": 0,
+  "path_count": 1
+}

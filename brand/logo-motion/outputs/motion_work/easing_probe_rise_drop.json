@@ -1,0 +1,29 @@
+{
+ "html": "logo_motion.html",
+ "probe": [
+  {
+   "t": 250.0,
+   "#tower:transform": "matrix(1, 0, 0, 1, 0, 97.3868)",
+   "#hanger-l1:clip-path": "inset(0px 0px 100%)",
+   "#hanger-l3:clip-path": "inset(0px 0px 100%)"
+  },
+  {
+   "t": 540.0,
+   "#tower:transform": "matrix(1, 0, 0, 1, 0, 0)",
+   "#hanger-l1:clip-path": "inset(-0.416429% -4.16429% 57.9407%)",
+   "#hanger-l3:clip-path": "inset(0px 0px 100%)"
+  },
+  {
+   "t": 600.0,
+   "#tower:transform": "matrix(1, 0, 0, 1, 0, 0)",
+   "#hanger-l1:clip-path": "inset(-0.87515% -8.7515% 11.6099%)",
+   "#hanger-l3:clip-path": "inset(-0.64499% -6.4499% 34.856%)"
+  },
+  {
+   "t": 700.0,
+   "#tower:transform": "matrix(1, 0, 0, 1, 0, 0)",
+   "#hanger-l1:clip-path": "inset(-1% -10%)",
+   "#hanger-l3:clip-path": "inset(-0.999415% -9.99414% -0.940863%)"
+  }
+ ]
+}

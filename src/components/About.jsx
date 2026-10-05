@@ -1,5 +1,5 @@
 import { Reveal, CountUp } from './ui'
-import { LogoMark } from './Logo'
+import { LogoLockup } from './Logo'
 import { about, stats } from '../data/site'
 
 export default function About() {
@@ -9,15 +9,15 @@ export default function About() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-20">
           {/* Visual side */}
           <Reveal className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-3xl border border-line bg-white p-10 md:p-14">
+            <div className="relative overflow-hidden rounded-3xl border border-line bg-surface p-10 md:p-14">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-brand/8 blur-2xl"
               />
-              <LogoMark className="relative h-24 w-24 md:h-28 md:w-28" />
+              <LogoLockup motion="inview" className="relative w-56 md:w-64" />
 
               <p className="relative mt-10 text-xl font-bold leading-snug tracking-tight text-ink-900 md:text-2xl">
-                “Jembatan” means bridge. “Selaras” means in harmony. That is the whole brief.
+                Connected. Aligned. Growing.
               </p>
 
               <dl className="relative mt-10 space-y-5 border-t border-line pt-8">

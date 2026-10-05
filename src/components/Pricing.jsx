@@ -27,7 +27,7 @@ export default function Pricing() {
             <Reveal key={plan.name} delay={i * 90} className="h-full">
               <article
                 className={`flex h-full flex-col p-8 md:p-10 ${
-                  plan.featured ? 'bg-ink-900 text-white' : 'bg-white'
+                  plan.featured ? 'bg-night text-white' : 'bg-surface'
                 }`}
               >
                 <div className="flex items-center justify-between gap-4">
@@ -109,7 +109,7 @@ export default function Pricing() {
         <div className="mt-px grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:mt-6 md:grid-cols-2">
           {pricing.addons.map((addon, i) => (
             <Reveal key={addon.name} delay={i * 80}>
-              <div className="flex h-full flex-col gap-4 bg-white p-8 sm:flex-row sm:items-center sm:justify-between md:p-10">
+              <div className="flex h-full flex-col gap-4 bg-surface p-8 sm:flex-row sm:items-center sm:justify-between md:p-10">
                 <div className="max-w-sm">
                   <h3 className="text-lg font-extrabold tracking-tight text-ink-900">
                     {addon.name}

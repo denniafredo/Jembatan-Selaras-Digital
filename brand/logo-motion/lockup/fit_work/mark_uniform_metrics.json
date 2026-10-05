@@ -1,0 +1,8 @@
+{
+  "svg": "mark_uniform.svg",
+  "source": "source_mark_only.png",
+  "overlay": "..\\fit_iterations\\0u_mark_uniform_overlay.png",
+  "iou": 0.8592,
+  "src_only_px": 5166,
+  "render_only_px": 4770
+}

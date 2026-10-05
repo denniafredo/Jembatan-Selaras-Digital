@@ -180,6 +180,23 @@ export function PinIcon({ className = 'h-5 w-5' }) {
   )
 }
 
+export function SunIcon({ className = 'h-5 w-5' }) {
+  return (
+    <Stroke className={className}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4" />
+    </Stroke>
+  )
+}
+
+export function MoonIcon({ className = 'h-5 w-5' }) {
+  return (
+    <Stroke className={className}>
+      <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z" />
+    </Stroke>
+  )
+}
+
 export function CheckIcon({ className = 'h-4 w-4' }) {
   return (
     <Stroke className={className}>
@@ -196,7 +213,7 @@ export function Button({ href, children, variant = 'solid', className = '', ...r
   const styles = {
     solid: 'bg-brand text-white hover:bg-brand-dark hover:shadow-lg hover:shadow-brand/25',
     outline: 'border border-line bg-transparent text-ink-900 hover:border-brand hover:text-brand',
-    ghost: 'bg-white text-ink-900 hover:bg-brand hover:text-white',
+    ghost: 'bg-surface text-ink-900 hover:bg-brand hover:text-white',
   }
 
   const content = (

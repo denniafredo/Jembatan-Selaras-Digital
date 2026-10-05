@@ -1,0 +1,8 @@
+{
+  "svg": "fit_work\\lockup_srcframe.svg",
+  "source": "source_lockup.png",
+  "overlay": "fit_iterations\\02_lockup_overlay.png",
+  "iou": 0.8435,
+  "src_only_px": 7643,
+  "render_only_px": 7270
+}

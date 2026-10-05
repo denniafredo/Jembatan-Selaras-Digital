@@ -6,7 +6,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-ink-900 text-white">
+    <footer className="bg-night text-white">
       <div className="shell py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-5">
@@ -31,7 +31,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-3">
               {nav.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="text-sm text-line hover:text-white">
+                  <a href={item.href} className="text-sm text-night-ink hover:text-white">
                     {item.label}
                   </a>
                 </li>
@@ -46,7 +46,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-3">
               {services.map((service) => (
                 <li key={service.number}>
-                  <a href="#services" className="text-sm text-line hover:text-white">
+                  <a href="#services" className="text-sm text-night-ink hover:text-white">
                     {service.title}
                   </a>
                 </li>
@@ -65,7 +65,7 @@ export default function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="text-sm text-line hover:text-white"
+                    className="text-sm text-night-ink hover:text-white"
                   >
                     {item.label}
                   </a>

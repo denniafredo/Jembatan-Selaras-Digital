@@ -1,0 +1,8 @@
+{
+  "svg": "outputs\\fit_work\\logo_srcframe.svg",
+  "source": "source.jpg",
+  "overlay": "outputs\\fit_iterations\\01_primitives_overlay.png",
+  "iou": 0.6186,
+  "src_only_px": 2710,
+  "render_only_px": 57797
+}

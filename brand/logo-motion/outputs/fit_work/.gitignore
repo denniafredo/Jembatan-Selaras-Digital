@@ -1,0 +1,5 @@
+# regenerable intermediates (measure.py / Edge renders)
+*.npy
+__pycache__/
+render_4x.png
+ffc_*.png

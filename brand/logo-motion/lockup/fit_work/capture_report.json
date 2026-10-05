@@ -1,0 +1,32 @@
+{
+  "html": "lockup\\logo_lockup_motion.html",
+  "times_ms": [
+    0,
+    300,
+    600,
+    800,
+    930,
+    1025,
+    1150,
+    1250,
+    1300,
+    1400,
+    1500,
+    1600
+  ],
+  "frames": [
+    "lockup\\motion_frames\\frame_000000ms.png",
+    "lockup\\motion_frames\\frame_000300ms.png",
+    "lockup\\motion_frames\\frame_000600ms.png",
+    "lockup\\motion_frames\\frame_000800ms.png",
+    "lockup\\motion_frames\\frame_000930ms.png",
+    "lockup\\motion_frames\\frame_001025ms.png",
+    "lockup\\motion_frames\\frame_001150ms.png",
+    "lockup\\motion_frames\\frame_001250ms.png",
+    "lockup\\motion_frames\\frame_001300ms.png",
+    "lockup\\motion_frames\\frame_001400ms.png",
+    "lockup\\motion_frames\\frame_001500ms.png",
+    "lockup\\motion_frames\\frame_001600ms.png"
+  ],
+  "strip": "lockup\\motion_strip.png"
+}

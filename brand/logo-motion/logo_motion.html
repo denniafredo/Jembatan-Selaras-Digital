@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jembatan Selaras Digital — Logo Motion</title>
+  <style>
+    @property --jsd-rise { syntax: '<length>'; inherits: false; initial-value: 0px; }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f3;
+      --border: rgba(0,0,0,0.08);
+      --text-primary: #0d0d0d;
+      --text-secondary: #777;
+      --text-tertiary: #aaa;
+      --accent: #0E93D3;
+      --speed-progress: 9%;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    #logo-root {
+      width: min(92vw, 484.4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #logo-root svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+      text-rendering: geometricPrecision;
+    }
+
+    .atomic-motions {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .atom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .atom-stage {
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .atom-stage svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .atom[data-atom="deck"] :is(.jsd-tower, .jsd-cable-pen, .jsd-hanger, .jsd-arc-pen),
+    .atom[data-atom="tower"] :is(.jsd-deck, .jsd-cable-pen, .jsd-hanger, .jsd-arc-pen),
+    .atom[data-atom="cables"] :is(.jsd-deck, .jsd-tower, .jsd-arc-pen) {
+      animation: none !important;
+    }
+
+    .atom-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 260ms cubic-bezier(0.34,1.56,0.64,1);
+      transform-origin: center;
+    }
+
+    .atom-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+    }
+
+    .principles {
+      max-width: 760px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pill {
+      font-size: 11px;
+      line-height: 1;
+      padding: 5px 10px;
+      border: 0.5px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .pill.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font: 12px/1.2 inherit;
+      letter-spacing: 0.04em;
+      padding: 8px 18px;
+      border: 0.5px solid var(--border);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    button.primary {
+      color: var(--bg);
+      background: var(--text-primary);
+      border-color: var(--text-primary);
+    }
+
+    .speed-control {
+      width: min(340px, 80vw);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 12px;
+      border: 0.5px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-secondary);
+    }
+
+    .speed-caption,
+    .speed-value {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .speed-value {
+      min-width: 46px;
+      text-align: right;
+      color: var(--text-primary);
+      text-transform: none;
+      font-variant-numeric: tabular-nums;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      min-width: 120px;
+      height: 24px;
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      cursor: grab;
+      accent-color: var(--accent);
+    }
+
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--speed-progress), var(--border) var(--speed-progress), var(--border) 100%);
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      margin-top: -6.5px;
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      background: var(--accent);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+    }
+
+    .footer {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .p2m-chromeless .atomic-motions,
+    .p2m-chromeless .principles,
+    .p2m-chromeless .controls,
+    .p2m-chromeless .footer {
+      display: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      /*
+       * Jembatan Selaras Digital — logo motion (Pixel2Motion v2)
+       * Personality: steady · precise · harmonious  →  Trustworthy/Professional preset
+       * (no squash, no overshoot; one easing family).  See motion_spec.md.
+       *
+       * One shared 1000 ms clock: every intro part runs the full duration and its phase lives in
+       * the keyframe percentages, so ?t=<ms> seeks the whole choreography 1:1.
+       * Easing inside @keyframes is LITERAL on purpose: var() there is silently dropped (→ linear).
+       *
+       * States (on the <svg class="jsd-mark">):
+       *   data-motion="intro"    play the reveal       data-motion="pending"  hold the reveal's first frame
+       *   data-motion="redraw"   hover: arc re-draw     anything else          static logo
+       * The host only applies this file when the visitor has not asked for reduced motion.
+       *
+       * No compositor animations: a transform animation makes Chromium raster the whole SVG on a
+       * different path (edge anti-aliasing changes, then flips back when the animation detaches).
+       * So the tower rises through a registered custom property, and hangers drop with clip-path.
+       * The host must declare, at top level (outside any @media):
+       *   @property --jsd-rise { syntax: '<length>'; inherits: false; initial-value: 0px; }
+       */
+
+      .jsd-mark {
+        --p2m-duration: 1000ms;
+        --p2m-hover-duration: 280ms;
+        --p2m-ease-enter: cubic-bezier(0, 0, 0.2, 1); /* entrances: deck, tower, hangers */
+        --p2m-ease-settle: cubic-bezier(0.4, 0, 0.2, 1); /* draws: cables, arc */
+      }
+
+      .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-deck {
+        animation: jsd-deck var(--p2m-duration) linear both;
+      }
+      .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-tower {
+        transform: translateY(var(--jsd-rise));
+        animation: jsd-tower var(--p2m-duration) linear both;
+      }
+      .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-cable-pen {
+        animation: jsd-cable var(--p2m-duration) linear both;
+      }
+      .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-hanger-1 {
+        animation: jsd-hanger-1 var(--p2m-duration) linear both;
+      }
+      .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-hanger-2 {
+        animation: jsd-hanger-2 var(--p2m-duration) linear both;
+      }
+      .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-hanger-3 {
+        animation: jsd-hanger-3 var(--p2m-duration) linear both;
+      }
+      .jsd-mark:is([data-motion='intro'], [data-motion='pending']) .jsd-arc-pen {
+        animation: jsd-arc var(--p2m-duration) linear both;
+      }
+      /* Lockup (mark + wordmark): the mark keeps its 1000 ms clock; the wordmark follows on a
+         1600 ms clock that starts at the same moment, so ?t=<ms> still seeks everything 1:1. */
+      .jsd-lockup {
+        --p2m-lockup-duration: 1600ms;
+      }
+      .jsd-lockup:is([data-motion='intro'], [data-motion='pending']) .jsd-word-1 {
+        animation: jsd-word-1 var(--p2m-lockup-duration) linear both;
+      }
+      .jsd-lockup:is([data-motion='intro'], [data-motion='pending']) .jsd-letter {
+        animation: jsd-letter 220ms cubic-bezier(0, 0, 0.2, 1) both; /* --p2m-ease-enter */
+        animation-delay: calc(1100ms + var(--i) * 45ms);
+      }
+
+      .jsd-mark[data-motion='pending'] * {
+        animation-play-state: paused;
+      }
+
+      /* Hover: the arc closes again at 2x the reveal's pace (ease-out only at this length). */
+      .jsd-mark[data-motion='redraw'] .jsd-arc-pen {
+        animation: jsd-arc-redraw var(--p2m-hover-duration) cubic-bezier(0, 0, 0.2, 1) both;
+      }
+
+      /* 60-300 ms — the deck is laid from the centre out to both banks (staging the ground line). */
+      @keyframes jsd-deck {
+        0%,
+        6% {
+          clip-path: inset(0 50% 0 50%);
+          animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+        }
+        30%,
+        100% {
+          clip-path: inset(-10% -1% -10% -1%);
+        }
+      }
+
+      /* 140-440 ms — the tower rises out of the deck (clipped under the deck's top edge). */
+      @keyframes jsd-tower {
+        0%,
+        14% {
+          --jsd-rise: 350px;
+          animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+        }
+        44%,
+        100% {
+          --jsd-rise: 0px;
+        }
+      }
+
+      /* 420-740 ms — both cables are drawn from the tower tops down to the deck ends,
+         starting only once the tower is home (< 1 unit away) so nothing detaches. */
+      @keyframes jsd-cable {
+        0%,
+        42% {
+          stroke-dashoffset: 1;
+          animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* --p2m-ease-settle */
+        }
+        74%,
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      /* Hangers drop the moment the cable pen passes them (517 / 537 / 555 ms; timeline.py). */
+      @keyframes jsd-hanger-1 {
+        0%,
+        51.7% {
+          clip-path: inset(0 0 100% 0); /* drops from the cable */
+          animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+        }
+        66.7%,
+        100% {
+          clip-path: inset(-1% -10% -1% -10%);
+        }
+      }
+      @keyframes jsd-hanger-2 {
+        0%,
+        53.7% {
+          clip-path: inset(0 0 100% 0); /* drops from the cable */
+          animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+        }
+        68.7%,
+        100% {
+          clip-path: inset(-1% -10% -1% -10%);
+        }
+      }
+      @keyframes jsd-hanger-3 {
+        0%,
+        55.5% {
+          clip-path: inset(0 0 100% 0); /* drops from the cable */
+          animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --p2m-ease-enter */
+        }
+        70.5%,
+        100% {
+          clip-path: inset(-1% -10% -1% -10%);
+        }
+      }
+
+      /* 480-1000 ms — the two halves of the arc rise from the banks and meet at the top (~930 ms). */
+      @keyframes jsd-arc {
+        0%,
+        48% {
+          stroke-dashoffset: 1;
+          animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* --p2m-ease-settle */
+        }
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      /* Lockup 800-1250 ms — line 1 is written left to right (reading order) as the ring closes. */
+      @keyframes jsd-word-1 {
+        0%,
+        50% {
+          clip-path: inset(-10% 100% -10% -2%);
+          animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* --p2m-ease-settle */
+        }
+        78.125%,
+        100% {
+          clip-path: inset(-10% -2% -10% -2%);
+        }
+      }
+
+      /* Lockup 1100-1590 ms — each DIGITAL letter rises out of its baseline, 45 ms apart. */
+      @keyframes jsd-letter {
+        from {
+          clip-path: inset(100% -10% -10% -10%);
+        }
+        to {
+          clip-path: inset(-10%);
+        }
+      }
+
+      @keyframes jsd-arc-redraw {
+        from {
+          stroke-dashoffset: 1;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="logo-root" aria-label="Animated logo" data-p2m-duration="1000"></main>
+
+  <section class="atomic-motions" aria-label="Atomic motion studies">
+    <div class="atom" data-atom="redraw"><div class="atom-stage"></div><span class="atom-label">Hover · re-draw</span></div>
+    <div class="atom" data-atom="deck"><div class="atom-stage"></div><span class="atom-label">Deck</span></div>
+    <div class="atom" data-atom="tower"><div class="atom-stage"></div><span class="atom-label">Tower</span></div>
+    <div class="atom" data-atom="cables"><div class="atom-stage"></div><span class="atom-label">Cables</span></div>
+  </section>
+
+  <div class="principles" id="principlesRow">
+    <span class="pill" data-p="anticipation">Anticipation</span>
+    <span class="pill" data-p="staging">Staging</span>
+    <span class="pill" data-p="slowinout">Slow in / out</span>
+    <span class="pill" data-p="timing">Timing</span>
+    <span class="pill" data-p="overlap">Overlapping</span>
+    <span class="pill" data-p="followthrough">Follow through</span>
+    <span class="pill" data-p="arc">Arcs</span>
+    <span class="pill" data-p="solid">Solid drawing</span>
+    <span class="pill" data-p="appeal">Appeal</span>
+  </div>
+
+  <div class="controls">
+    <button class="primary" id="btnReplay" type="button">Replay</button>
+    <button id="btnSlow" type="button">Slow motion</button>
+    <label class="speed-control" for="speedSlider">
+      <span class="speed-caption">Speed</span>
+      <input id="speedSlider" type="range" min="0.25" max="2.5" step="0.05" value="0.45" aria-label="Animation speed">
+      <span class="speed-value" id="speedValue">0.45x</span>
+    </label>
+  </div>
+
+  <p class="footer">Click the main logo to replay | Drag speed | Try atomic motions</p>
+
+  <script>
+    const SVG_NS = "http://www.w3.org/2000/svg";
+    const LOGO = {"tag":"svg","attrs":{"viewBox":"166 84.5 692 692","width":"692","height":"692","class":"jsd-mark","data-motion":"intro","role":"img","aria-label":"Jembatan Selaras Digital"},"children":[{"tag":"title","attrs":{},"children":[],"text":"Jembatan Selaras Digital"},{"tag":"defs","attrs":{},"children":[{"tag":"clipPath","attrs":{"id":"rise-clip"},"children":[{"tag":"path","attrs":{"d":"M177.63 694.54C271.61 603.13 464.19 597.25 512 597.25C559.81 597.25 752.39 603.13 846.37 694.54V0H177.63Z"},"children":[]}]},{"tag":"mask","attrs":{"id":"cable-l-mask","maskUnits":"userSpaceOnUse","x":"0","y":"0","width":"1024","height":"1024"},"children":[{"tag":"path","attrs":{"id":"cable-l-pen","class":"jsd-pen jsd-cable-pen","d":"M446.08 246C445.44 264 445.18 282.67 444.16 300C443.15 317.33 442.66 334.17 440 350C437.33 365.83 433.76 378.33 428.17 395C422.58 411.67 415.99 430.83 406.46 450C396.92 469.17 386.08 490 370.96 510C355.84 530 335.41 552.5 315.74 570C296.08 587.5 272.23 602.76 252.97 615C233.72 627.24 210.89 637.32 200.21 643.43C189.53 649.54 192.67 648.93 188.91 651.68","fill":"none","stroke":"#fff","stroke-width":"35","pathLength":"1","stroke-dasharray":"1 1"},"children":[]}]},{"tag":"mask","attrs":{"id":"cable-r-mask","maskUnits":"userSpaceOnUse","x":"0","y":"0","width":"1024","height":"1024"},"children":[{"tag":"path","attrs":{"id":"cable-r-pen","class":"jsd-pen jsd-cable-pen","d":"M577.92 246C578.56 264 578.82 282.67 579.84 300C580.85 317.33 581.34 334.17 584 350C586.67 365.83 590.24 378.33 595.83 395C601.42 411.67 608.01 430.83 617.54 450C627.08 469.17 637.92 490 653.04 510C668.16 530 688.59 552.5 708.26 570C727.92 587.5 751.77 602.76 771.03 615C790.28 627.24 813.11 637.32 823.79 643.43C834.47 649.54 831.33 648.93 835.09 651.68","fill":"none","stroke":"#fff","stroke-width":"35","pathLength":"1","stroke-dasharray":"1 1"},"children":[]}]},{"tag":"mask","attrs":{"id":"arc-mask","maskUnits":"userSpaceOnUse","x":"0","y":"0","width":"1024","height":"1024"},"children":[{"tag":"path","attrs":{"id":"arc-pen-l","class":"jsd-pen jsd-arc-pen","d":"M226.23 629.26A315.56 313.14 0 0 1 520.26 183.41","fill":"none","stroke":"#fff","stroke-width":"46","pathLength":"1","stroke-dasharray":"1 1"},"children":[]},{"tag":"path","attrs":{"id":"arc-pen-r","class":"jsd-pen jsd-arc-pen","d":"M797.77 629.26A315.56 313.14 0 0 0 503.74 183.41","fill":"none","stroke":"#fff","stroke-width":"46","pathLength":"1","stroke-dasharray":"1 1"},"children":[]}]}]},{"tag":"g","attrs":{"id":"bridge","fill":"#51626F"},"children":[{"tag":"g","attrs":{"clip-path":"url(#rise-clip)"},"children":[{"tag":"g","attrs":{"id":"tower","class":"jsd-tower"},"children":[{"tag":"path","attrs":{"d":"M444 254.5L459.1 254.5L461 286.14L461 615.5L441.8 615.5L441.8 380.5Z"},"children":[]},{"tag":"path","attrs":{"d":"M580 254.5L564.9 254.5L563 286.14L563 615.5L582.2 615.5L582.2 380.5Z"},"children":[]},{"tag":"rect","attrs":{"x":"457","y":"286.14","width":"110","height":"22.12"},"children":[]},{"tag":"rect","attrs":{"x":"457","y":"386.4","width":"110","height":"24.18"},"children":[]},{"tag":"rect","attrs":{"x":"457","y":"491.8","width":"110","height":"24.15"},"children":[]}]}]},{"tag":"path","attrs":{"id":"cable-l","class":"jsd-cable","d":"M444.23 254.5C444.23 254.58 441.9 328.99 419.99 394.7C367.93 550.8 261.63 597.7 196.98 645.79C253.97 620.94 386.95 578 441.8 376.64L447.8 330.5L448 260.5Z","mask":"url(#cable-l-mask)"},"children":[]},{"tag":"path","attrs":{"id":"cable-r","class":"jsd-cable","d":"M579.77 254.5C579.77 254.58 582.1 328.99 604.01 394.7C656.07 550.8 762.37 597.7 827.02 645.79C770.03 620.94 637.05 578 582.2 376.64L576.2 330.5L576 260.5Z","mask":"url(#cable-r-mask)"},"children":[]},{"tag":"rect","attrs":{"x":"408","y":"433.5","width":"11","height":"179","id":"hanger-l1","class":"jsd-hanger jsd-hanger-1"},"children":[]},{"tag":"rect","attrs":{"x":"368.25","y":"505.5","width":"9.8","height":"113","id":"hanger-l2","class":"jsd-hanger jsd-hanger-2"},"children":[]},{"tag":"rect","attrs":{"x":"328.55","y":"552.5","width":"9.5","height":"74","id":"hanger-l3","class":"jsd-hanger jsd-hanger-3"},"children":[]},{"tag":"rect","attrs":{"x":"605","y":"433.5","width":"11","height":"179","id":"hanger-r1","class":"jsd-hanger jsd-hanger-1"},"children":[]},{"tag":"rect","attrs":{"x":"645.95","y":"505.5","width":"9.8","height":"113","id":"hanger-r2","class":"jsd-hanger jsd-hanger-2"},"children":[]},{"tag":"rect","attrs":{"x":"685.95","y":"552.5","width":"9.5","height":"74","id":"hanger-r3","class":"jsd-hanger jsd-hanger-3"},"children":[]}]},{"tag":"path","attrs":{"id":"deck","class":"jsd-deck","fill":"#0E93D3","d":"M177.63 691.54C271.61 600.13 464.19 594.25 512 594.25C559.81 594.25 752.39 600.13 846.37 691.54C849.86 700.62 761.77 634.34 512 634.34C262.23 634.34 174.14 700.62 177.63 691.54Z"},"children":[]},{"tag":"path","attrs":{"id":"arc","class":"jsd-arc","fill":"#0E93D3","d":"M207.58 620.03A330.5 325.68 0 1 1 816.42 620.03L793.37 605.49A300.61 300.61 0 1 0 230.63 605.49Z","mask":"url(#arc-mask)"},"children":[]}]};
+    const SVG_TEXT = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"166 84.5 692 692\" width=\"692\" height=\"692\" class=\"jsd-mark\" data-motion=\"intro\" role=\"img\" aria-label=\"Jembatan Selaras Digital\"><style>:root,svg{--bg:#ffffff;--surface:#f5f5f3;--text-primary:#0d0d0d;--text-secondary:#777;--text-tertiary:#aaa;--logo-wordmark:#363e47;--accent:#e64036;--red:#e64036;--red-bright:#ff493f;}<\/style>\n  <title>Jembatan Selaras Digital<\/title>\n  <defs>\n    <clipPath id=\"rise-clip\"><path d=\"M177.63 694.54C271.61 603.13 464.19 597.25 512 597.25C559.81 597.25 752.39 603.13 846.37 694.54V0H177.63Z\"/><\/clipPath>\n    <mask id=\"cable-l-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"1024\" height=\"1024\">\n      <path id=\"cable-l-pen\" class=\"jsd-pen jsd-cable-pen\" d=\"M446.08 246C445.44 264 445.18 282.67 444.16 300C443.15 317.33 442.66 334.17 440 350C437.33 365.83 433.76 378.33 428.17 395C422.58 411.67 415.99 430.83 406.46 450C396.92 469.17 386.08 490 370.96 510C355.84 530 335.41 552.5 315.74 570C296.08 587.5 272.23 602.76 252.97 615C233.72 627.24 210.89 637.32 200.21 643.43C189.53 649.54 192.67 648.93 188.91 651.68\" fill=\"none\" stroke=\"#fff\" stroke-width=\"35\" pathLength=\"1\" stroke-dasharray=\"1 1\"/>\n    <\/mask>\n    <mask id=\"cable-r-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"1024\" height=\"1024\">\n      <path id=\"cable-r-pen\" class=\"jsd-pen jsd-cable-pen\" d=\"M577.92 246C578.56 264 578.82 282.67 579.84 300C580.85 317.33 581.34 334.17 584 350C586.67 365.83 590.24 378.33 595.83 395C601.42 411.67 608.01 430.83 617.54 450C627.08 469.17 637.92 490 653.04 510C668.16 530 688.59 552.5 708.26 570C727.92 587.5 751.77 602.76 771.03 615C790.28 627.24 813.11 637.32 823.79 643.43C834.47 649.54 831.33 648.93 835.09 651.68\" fill=\"none\" stroke=\"#fff\" stroke-width=\"35\" pathLength=\"1\" stroke-dasharray=\"1 1\"/>\n    <\/mask>\n    <mask id=\"arc-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"1024\" height=\"1024\">\n      <path id=\"arc-pen-l\" class=\"jsd-pen jsd-arc-pen\" d=\"M226.23 629.26A315.56 313.14 0 0 1 520.26 183.41\" fill=\"none\" stroke=\"#fff\" stroke-width=\"46\" pathLength=\"1\" stroke-dasharray=\"1 1\"/>\n      <path id=\"arc-pen-r\" class=\"jsd-pen jsd-arc-pen\" d=\"M797.77 629.26A315.56 313.14 0 0 0 503.74 183.41\" fill=\"none\" stroke=\"#fff\" stroke-width=\"46\" pathLength=\"1\" stroke-dasharray=\"1 1\"/>\n    <\/mask>\n  <\/defs>\n  <g id=\"bridge\" fill=\"#51626F\">\n    <g clip-path=\"url(#rise-clip)\">\n      <g id=\"tower\" class=\"jsd-tower\">\n        <path d=\"M444 254.5L459.1 254.5L461 286.14L461 615.5L441.8 615.5L441.8 380.5Z\"/>\n        <path d=\"M580 254.5L564.9 254.5L563 286.14L563 615.5L582.2 615.5L582.2 380.5Z\"/>\n        <rect x=\"457\" y=\"286.14\" width=\"110\" height=\"22.12\"/>\n        <rect x=\"457\" y=\"386.4\" width=\"110\" height=\"24.18\"/>\n        <rect x=\"457\" y=\"491.8\" width=\"110\" height=\"24.15\"/>\n      <\/g>\n    <\/g>\n    <path id=\"cable-l\" class=\"jsd-cable\" d=\"M444.23 254.5C444.23 254.58 441.9 328.99 419.99 394.7C367.93 550.8 261.63 597.7 196.98 645.79C253.97 620.94 386.95 578 441.8 376.64L447.8 330.5L448 260.5Z\" mask=\"url(#cable-l-mask)\"/>\n    <path id=\"cable-r\" class=\"jsd-cable\" d=\"M579.77 254.5C579.77 254.58 582.1 328.99 604.01 394.7C656.07 550.8 762.37 597.7 827.02 645.79C770.03 620.94 637.05 578 582.2 376.64L576.2 330.5L576 260.5Z\" mask=\"url(#cable-r-mask)\"/>\n    <rect x=\"408\" y=\"433.5\" width=\"11\" height=\"179\" id=\"hanger-l1\" class=\"jsd-hanger jsd-hanger-1\"/>\n    <rect x=\"368.25\" y=\"505.5\" width=\"9.8\" height=\"113\" id=\"hanger-l2\" class=\"jsd-hanger jsd-hanger-2\"/>\n    <rect x=\"328.55\" y=\"552.5\" width=\"9.5\" height=\"74\" id=\"hanger-l3\" class=\"jsd-hanger jsd-hanger-3\"/>\n    <rect x=\"605\" y=\"433.5\" width=\"11\" height=\"179\" id=\"hanger-r1\" class=\"jsd-hanger jsd-hanger-1\"/>\n    <rect x=\"645.95\" y=\"505.5\" width=\"9.8\" height=\"113\" id=\"hanger-r2\" class=\"jsd-hanger jsd-hanger-2\"/>\n    <rect x=\"685.95\" y=\"552.5\" width=\"9.5\" height=\"74\" id=\"hanger-r3\" class=\"jsd-hanger jsd-hanger-3\"/>\n  <\/g>\n  <path id=\"deck\" class=\"jsd-deck\" fill=\"#0E93D3\" d=\"M177.63 691.54C271.61 600.13 464.19 594.25 512 594.25C559.81 594.25 752.39 600.13 846.37 691.54C849.86 700.62 761.77 634.34 512 634.34C262.23 634.34 174.14 700.62 177.63 691.54Z\"/>\n  <path id=\"arc\" class=\"jsd-arc\" fill=\"#0E93D3\" d=\"M207.58 620.03A330.5 325.68 0 1 1 816.42 620.03L793.37 605.49A300.61 300.61 0 1 0 230.63 605.49Z\" mask=\"url(#arc-mask)\"/>\n<\/svg>\n";
+    const SVG_URI = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(SVG_TEXT);
+    const DURATION = 1000;
+
+    let playbackRate = 0.45;
+    let pulseRaf = null;
+    let arcRaf = null;
+    window.__p2mReady = false;
+
+    function createSvgNode(node) {
+      const element = document.createElementNS(SVG_NS, node.tag);
+      for (const [name, value] of Object.entries(node.attrs || {})) {
+        element.setAttribute(name, value);
+      }
+      if (node.text) {
+        element.appendChild(document.createTextNode(node.text));
+      }
+      for (const child of node.children || []) {
+        element.appendChild(createSvgNode(child));
+      }
+      return element;
+    }
+
+    function heroAnimations() {
+      const root = document.getElementById("logo-root");
+      if (root.getAnimations) return root.getAnimations({ subtree: true });
+      return document.getAnimations().filter(animation => {
+        const target = animation.effect && animation.effect.target;
+        return target && root.contains(target);
+      });
+    }
+
+    function applyPlaybackRate() {
+      for (const animation of heroAnimations()) {
+        if (animation.updatePlaybackRate) animation.updatePlaybackRate(playbackRate);
+        else animation.playbackRate = playbackRate;
+      }
+    }
+
+    function renderHero() {
+      const root = document.getElementById("logo-root");
+      root.replaceChildren(createSvgNode(LOGO));
+      const svg = root.querySelector("svg");
+      if (svg) {
+        svg.removeAttribute("width");
+        svg.removeAttribute("height");
+        svg.style.width = "100%";
+        svg.style.height = "auto";
+        svg.style.overflow = "visible";
+      }
+      requestAnimationFrame(() => requestAnimationFrame(applyPlaybackRate));
+    }
+
+    function flashPills(...names) {
+      document.querySelectorAll(".pill").forEach(pill => pill.classList.remove("active"));
+      names.forEach(name => {
+        const pill = document.querySelector(`[data-p="${name}"]`);
+        if (pill) pill.classList.add("active");
+      });
+    }
+
+    function cyclePrinciples() {
+      const phases = [
+        ["anticipation", "staging"],    // 0-200 ms: the deck lays the ground line
+        ["timing", "slowinout"],        // 200-400: the tower rises and eases into place
+        ["overlap", "followthrough"],   // 400-600: cables draw, hangers drop as the pen passes
+        ["arc", "solid"],               // 600-800: the ring's halves travel its own curve
+        ["appeal"]                      // 800-1000: the halves meet at the top
+      ];
+      let i = 0;
+      flashPills(...phases[0]);
+      return setInterval(() => {
+        i = (i + 1) % phases.length;
+        flashPills(...phases[i]);
+      }, Math.max(240, DURATION / phases.length / Math.max(playbackRate, 0.25)));
+    }
+
+    let pillTimer = null;
+    function replayMain() {
+      clearInterval(pillTimer);
+      renderHero();
+      pillTimer = cyclePrinciples();
+      setTimeout(() => {
+        clearInterval(pillTimer);
+        document.querySelectorAll(".pill").forEach(pill => pill.classList.remove("active"));
+      }, DURATION / Math.max(playbackRate, 0.25) + 600);
+    }
+
+    function formatSpeed(rate) {
+      return `${rate.toFixed(2)}x`;
+    }
+
+    function updateSpeedUI() {
+      const slider = document.getElementById("speedSlider");
+      const value = Number(slider.value);
+      const min = Number(slider.min);
+      const max = Number(slider.max);
+      const progress = ((value - min) / (max - min)) * 100;
+      document.getElementById("speedValue").textContent = formatSpeed(value);
+      slider.style.setProperty("--speed-progress", `${progress}%`);
+      const slow = value <= 0.251;
+      const btnSlow = document.getElementById("btnSlow");
+      btnSlow.textContent = slow ? "Normal speed" : "Slow motion";
+      btnSlow.style.background = slow ? "var(--surface)" : "";
+      btnSlow.style.borderColor = slow ? "var(--text-secondary)" : "";
+    }
+
+    function setPlaybackRate(rate, replay = false) {
+      const slider = document.getElementById("speedSlider");
+      const min = Number(slider.min);
+      const max = Number(slider.max);
+      playbackRate = Math.min(max, Math.max(min, Number(rate)));
+      slider.value = String(playbackRate);
+      updateSpeedUI();
+      applyPlaybackRate();
+      if (replay) replayMain();
+    }
+
+    function cloneLogo(prefix, motion) {
+      const json = JSON.stringify(LOGO)
+        .replace(/"id":"([^"]+)"/g, (_, id) => `"id":"${prefix}${id}"`)
+        .replace(/url\(#([^)]+)\)/g, (_, id) => `url(#${prefix}${id})`);
+      const svg = createSvgNode(JSON.parse(json));
+      svg.removeAttribute("width");
+      svg.removeAttribute("height");
+      svg.setAttribute("data-motion", motion);
+      return svg;
+    }
+
+    const ATOM_MOTION = { redraw: "redraw", deck: "intro", tower: "intro", cables: "intro" };
+    const ATOM_PILLS = {
+      redraw: ["slowinout", "appeal"], deck: ["anticipation", "staging"],
+      tower: ["timing", "solid"], cables: ["overlap", "followthrough"]
+    };
+
+    function playAtom(atom) {
+      const kind = atom.dataset.atom;
+      flashPills(...ATOM_PILLS[kind]);
+      atom.querySelector(".atom-stage").replaceChildren(cloneLogo(`atom-${kind}-`, ATOM_MOTION[kind]));
+    }
+
+    function setupAtomImages() {
+      document.querySelectorAll(".atom").forEach(atom => {
+        atom.querySelector(".atom-stage").replaceChildren(cloneLogo(`atom-${atom.dataset.atom}-`, "static"));
+      });
+    }
+
+    function setupAtoms() {
+      document.querySelectorAll(".atom").forEach(atom => {
+        const stage = atom.querySelector(".atom-stage");
+        stage.addEventListener("mouseenter", () => playAtom(atom));
+        stage.addEventListener("click", () => playAtom(atom));
+      });
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (new URLSearchParams(location.search).has("t") || new URLSearchParams(location.search).has("static")) return;
+      document.querySelectorAll(".atom").forEach((atom, i) => {
+        setTimeout(() => playAtom(atom), DURATION / Math.max(playbackRate, 0.25) + 400 + i * 600);
+      });
+    }
+
+    function applyQaMode() {
+      const params = new URLSearchParams(location.search);
+      const seekMs = params.get("t");
+      const staticMode = params.get("static");
+      if (seekMs === null && staticMode === null) {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          applyPlaybackRate();
+          window.__p2mReady = true;
+        }));
+        return;
+      }
+
+      document.documentElement.classList.add("p2m-chromeless");
+      cancelAnimationFrame(pulseRaf);
+      cancelAnimationFrame(arcRaf);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        for (const animation of heroAnimations()) {
+          if (staticMode !== null) {
+            try {
+              animation.finish();
+            } catch (err) {
+              animation.cancel();
+            }
+          } else {
+            animation.pause();
+            animation.currentTime = Number(seekMs);
+          }
+        }
+        window.__p2mReady = true;
+      }));
+    }
+
+    document.getElementById("btnReplay").addEventListener("click", replayMain);
+    document.getElementById("logo-root").addEventListener("click", replayMain);
+    document.getElementById("speedSlider").addEventListener("input", event => {
+      setPlaybackRate(event.target.value, false);
+    });
+    document.getElementById("btnSlow").addEventListener("click", () => {
+      const slow = Number(document.getElementById("speedSlider").value) <= 0.251;
+      setPlaybackRate(slow ? 0.45 : 0.25, true);
+    });
+
+    setupAtomImages();
+    setupAtoms();
+    setPlaybackRate(0.45, false);
+    renderHero();
+    applyQaMode();
+  </script>
+</body>
+</html>

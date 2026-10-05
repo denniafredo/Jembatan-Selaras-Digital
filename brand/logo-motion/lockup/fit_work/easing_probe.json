@@ -1,0 +1,35 @@
+{
+ "html": "lockup\\logo_lockup_motion.html",
+ "probe": [
+  {
+   "t": 700.0,
+   "#wordmark-line1:clip-path": "inset(-10% 100% -10% -2%)",
+   "#w2-0:clip-path": "inset(100% -10% -10%)",
+   "#w2-6:clip-path": "inset(100% -10% -10%)"
+  },
+  {
+   "t": 900.0,
+   "#wordmark-line1:clip-path": "inset(-10% 82.1328% -10% -2%)",
+   "#w2-0:clip-path": "inset(100% -10% -10%)",
+   "#w2-6:clip-path": "inset(100% -10% -10%)"
+  },
+  {
+   "t": 1025.0,
+   "#wordmark-line1:clip-path": "inset(-10% 20.8927% -10% -2%)",
+   "#w2-0:clip-path": "inset(100% -10% -10%)",
+   "#w2-6:clip-path": "inset(100% -10% -10%)"
+  },
+  {
+   "t": 1200.0,
+   "#wordmark-line1:clip-path": "inset(-10% -1.28219% -10% -2%)",
+   "#w2-0:clip-path": "inset(11.5655% -10% -10%)",
+   "#w2-6:clip-path": "inset(100% -10% -10%)"
+  },
+  {
+   "t": 1300.0,
+   "#wordmark-line1:clip-path": "inset(-10% -2%)",
+   "#w2-0:clip-path": "inset(-9.51087% -10% -10%)",
+   "#w2-6:clip-path": "inset(100% -10% -10%)"
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "html": "logo_motion.html",
+ "probe": [
+  {
+   "t": 250.0,
+   "#cable-l-pen:stroke-dashoffset": "1px",
+   "#arc-pen-l:stroke-dashoffset": "1px",
+   "#tower:transform": "matrix(1, 0, 0, 1, 0, 97.3868)",
+   "#hanger-l1:transform": "matrix(1, 0, 0, 0, 0, 0)"
+  },
+  {
+   "t": 540.0,
+   "#cable-l-pen:stroke-dashoffset": "0.44027px",
+   "#arc-pen-l:stroke-dashoffset": "0.964254px",
+   "#tower:transform": "none",
+   "#hanger-l1:transform": "matrix(1, 0, 0, 0.416429, 0, 0)"
+  },
+  {
+   "t": 700.0,
+   "#cable-l-pen:stroke-dashoffset": "0.00901517px",
+   "#arc-pen-l:stroke-dashoffset": "0.341863px",
+   "#tower:transform": "none",
+   "#hanger-l1:transform": "none"
+  },
+  {
+   "t": 900.0,
+   "#cable-l-pen:stroke-dashoffset": "0px",
+   "#arc-pen-l:stroke-dashoffset": "0.0226977px",
+   "#tower:transform": "none",
+   "#hanger-l1:transform": "none"
+  }
+ ]
+}

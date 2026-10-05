@@ -87,7 +87,7 @@ export default function Testimonials() {
                   type="button"
                   onClick={() => go(index - 1)}
                   aria-label="Previous testimonial"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink-900 transition-colors hover:border-brand hover:bg-brand hover:text-white"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-surface text-ink-900 transition-colors hover:border-brand hover:bg-brand hover:text-white"
                 >
                   <Chevron direction="left" />
                 </button>
@@ -95,7 +95,7 @@ export default function Testimonials() {
                   type="button"
                   onClick={() => go(index + 1)}
                   aria-label="Next testimonial"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink-900 transition-colors hover:border-brand hover:bg-brand hover:text-white"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-surface text-ink-900 transition-colors hover:border-brand hover:bg-brand hover:text-white"
                 >
                   <Chevron direction="right" />
                 </button>
@@ -109,7 +109,7 @@ export default function Testimonials() {
           {/* min-w-0 keeps the slider from sizing the grid track to its max-content width */}
           <Reveal delay={120} className="min-w-0 lg:col-span-8">
             <div
-              className="w-full overflow-hidden rounded-3xl border border-line bg-white"
+              className="w-full overflow-hidden rounded-3xl border border-line bg-surface"
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
@@ -129,7 +129,7 @@ export default function Testimonials() {
                       {item.quote}
                     </blockquote>
                     <figcaption className="mt-8 flex items-center gap-4 border-t border-line pt-6">
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-soft text-sm font-extrabold text-brand-dark">
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-soft text-sm font-extrabold text-brand-ink">
                         {item.name
                           .split(' ')
                           .map((n) => n[0])
@@ -153,7 +153,7 @@ export default function Testimonials() {
       </div>
 
       {/* Client roster ticker */}
-      <div className="mt-16 border-y border-line bg-white py-6 md:mt-24">
+      <div className="mt-16 border-y border-line bg-surface py-6 md:mt-24">
         <Marquee duration={44}>
           {clients.map((client) => (
             <span key={client} className="flex items-center gap-10 px-10">

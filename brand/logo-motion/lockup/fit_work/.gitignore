@@ -1,0 +1,8 @@
+# regenerable intermediates (measure_mark.py, segment_wordmark.py, fit_layout.py, QA renders)
+*.npy
+*.ttf
+__pycache__/
+ffc_*.png
+mark_*_render.png
+lockup_render.png
+source_mark_only.png

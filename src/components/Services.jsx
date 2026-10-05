@@ -27,7 +27,7 @@ export default function Services() {
         <div className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:mt-20 md:grid-cols-2">
           {services.map((service, i) => (
             <Reveal key={service.number} delay={(i % 2) * 90}>
-              <article className="group relative h-full bg-white p-8 transition-colors duration-300 hover:bg-paper-2 md:p-10 lg:p-12">
+              <article className="group relative h-full bg-surface p-8 transition-colors duration-300 hover:bg-paper-2 md:p-10 lg:p-12">
                 <div className="flex items-start justify-between gap-6">
                   <span className="text-[0.7rem] font-bold tracking-[0.24em] text-muted">
                     {service.number}
@@ -48,7 +48,7 @@ export default function Services() {
                   {service.points.map((point) => (
                     <li
                       key={point}
-                      className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[0.72rem] font-semibold text-brand-dark"
+                      className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[0.72rem] font-semibold text-brand-ink"
                     >
                       {point}
                     </li>

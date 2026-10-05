@@ -1,0 +1,20 @@
+{
+  "segment_count": 5,
+  "cubic_segments": 3,
+  "line_segments": 2,
+  "closed": true,
+  "budget": null,
+  "over_budget": false,
+  "median_segment_length": 142.691,
+  "short_segment_warnings": [],
+  "join_angle_threshold_degrees": 8.0,
+  "join_angle_warnings": [
+    {
+      "join_after_segment": 2,
+      "angle_degrees": 166.915
+    }
+  ],
+  "input_svg": "outputs\\fit_work\\audit_cable.svg",
+  "selected_path_index": 0,
+  "path_count": 1
+}

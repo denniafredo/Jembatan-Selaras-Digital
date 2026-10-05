@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Logo } from './Logo'
+import ThemeToggle from './ThemeToggle'
 import { nav } from '../data/site'
 
 export default function Navbar() {
@@ -44,9 +45,7 @@ export default function Navbar() {
         }`}
       >
         <div className="shell flex h-[72px] items-center justify-between md:h-20">
-          <a href="#top" aria-label="Jembatan Selaras Digital — home">
-            <Logo compact />
-          </a>
+          <Logo compact intro href="#top" aria-label="Jembatan Selaras Digital — home" />
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
             {nav.map((item) => (
@@ -67,6 +66,8 @@ export default function Navbar() {
             >
               Start a project
             </a>
+
+            <ThemeToggle />
 
             <button
               type="button"

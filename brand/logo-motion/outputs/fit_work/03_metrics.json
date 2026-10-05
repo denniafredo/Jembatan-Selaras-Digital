@@ -1,0 +1,8 @@
+{
+  "svg": "outputs\\fit_work\\logo_srcframe.svg",
+  "source": "source.jpg",
+  "overlay": "outputs\\fit_iterations\\03_pixel_center_shift_overlay.png",
+  "iou": 0.974,
+  "src_only_px": 2256,
+  "render_only_px": 376
+}

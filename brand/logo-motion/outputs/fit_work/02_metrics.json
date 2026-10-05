@@ -1,0 +1,8 @@
+{
+  "svg": "outputs\\fit_work\\logo_srcframe.svg",
+  "source": "source.jpg",
+  "overlay": "outputs\\fit_iterations\\02_cable_constrained_overlay.png",
+  "iou": 0.9559,
+  "src_only_px": 3006,
+  "render_only_px": 1510
+}

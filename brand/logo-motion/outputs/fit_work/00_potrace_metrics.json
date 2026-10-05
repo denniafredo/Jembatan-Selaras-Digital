@@ -1,0 +1,8 @@
+{
+  "svg": "C:\\Users\\denni\\AppData\\Local\\Temp\\claude\\c---Project-Jembatan-Selaras-Digital\\8d5f7d63-bfde-4dc3-a9b8-20e89d89c84f\\scratchpad\\potrace_srcframe.svg",
+  "source": "source.jpg",
+  "overlay": "outputs\\fit_iterations\\00_potrace_baseline_overlay.png",
+  "iou": 0.9733,
+  "src_only_px": 2320,
+  "render_only_px": 388
+}

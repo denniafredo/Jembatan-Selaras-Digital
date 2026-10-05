@@ -10,7 +10,7 @@ import { contact, company } from '../data/site'
 const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT
 
 const field =
-  'w-full rounded-xl border border-line bg-white px-4 py-3.5 text-[0.95rem] text-ink-900 placeholder:text-muted transition-colors focus:border-brand focus:outline-none'
+  'w-full rounded-xl border border-line bg-surface px-4 py-3.5 text-[0.95rem] text-ink-900 placeholder:text-muted transition-colors focus:border-brand focus:outline-none'
 
 export default function Contact() {
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
@@ -110,7 +110,7 @@ export default function Contact() {
                 const Icon = detail.icon
                 return (
                   <Reveal key={detail.label} delay={i * 70}>
-                    <div className="group flex items-center gap-4 bg-white px-6 py-5">
+                    <div className="group flex items-center gap-4 bg-surface px-6 py-5">
                       <dt className="shrink-0">
                         <span className="sr-only">{detail.label}</span>
                         <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-brand group-hover:bg-brand group-hover:text-white">
@@ -202,7 +202,7 @@ export default function Contact() {
                       className={`rounded-full border px-4 py-2 text-[0.78rem] font-bold transition-colors ${
                         interest === item
                           ? 'border-brand bg-brand text-white'
-                          : 'border-line bg-white text-ink hover:border-brand hover:text-brand'
+                          : 'border-line bg-surface text-ink hover:border-brand hover:text-brand'
                       }`}
                     >
                       {item}
